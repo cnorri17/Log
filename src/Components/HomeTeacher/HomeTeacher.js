@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import {  } from 'mdbreact';
-import './HomeTeacher.css'
-import SideNav from '../SideNav/SideNav'
+import './HomeTeacher.css';
+import SideNav from '../SideNav/SideNav';
+import HtContent from '../HtContent/HtContent';
 
 
 class HomeTeacher extends Component {
@@ -11,7 +12,8 @@ class HomeTeacher extends Component {
     render(){
         return(
             <div>
-                <SideNav/>
+                {/* <SideNav/> */}
+                <HtContent />
             </div>
             
         )

@@ -1,9 +1,8 @@
 
-
 .wrapper {
-  
-    width: 100%;
-    align-items: stretch;
+    width: 20%;
+    /* align-items: stretch; */
+    margin-right: 0%;
 }
 
 /* size of sidebar */
@@ -89,6 +88,6 @@ a, a:hover, a:focus {
 }
 #sidebar ul li a:hover {
     /* color: #7386D5; */
-    background: white;
+    background-color: gray;
 }
 

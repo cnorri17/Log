@@ -5,8 +5,8 @@ import 'react-dropdown/style.css'
 
 
 class SideNavBar extends Component{
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         
         this.state = {
           showMenu: false,
@@ -39,18 +39,17 @@ class SideNavBar extends Component{
 
     render() {
         return (
-            
-            <div class="wrapper">
+            <div className="wrapper">
                 <nav id="sidebar">
-                    <div class="sidebar-header">
+                    <div className="sidebar-header">
                         <h4>Log Menu</h4>
                     </div>
-                    <ul class="list-unstyled components">
+                    <ul className="list-unstyled components">
                         <li>
                             <a href="#homeSubmenu">Home</a>
                         </li>
-                        <li class="active"> 
-                            <a href="#classListSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle" onClick={this.showMenu}>Class Lists</a>          
+                        <li className="active"> 
+                            <a href="#classListSubmenu" data-toggle="collapse" aria-expanded="false" className="dropdown-toggle" onClick={this.showMenu}>Class Lists</a>          
                         
                             {this.state.showMenu
                             ? (
@@ -79,10 +78,7 @@ class SideNavBar extends Component{
                         </li>
                     </ul>
                 </nav>
-                
-
-        </div>
-
+            </div>
         )
     }
 }
