@@ -88,7 +88,7 @@ a, a:hover, a:focus {
     display: block;
 }
 #sidebar ul li a:hover {
-    color: #7386D5;
+    /* color: #7386D5; */
     background: white;
 }
 

@@ -1,6 +1,7 @@
 import React, { Component} from 'react';
 import './SideNav.css'
 
+
 class SideNavBar extends Component{
     constructor(props) {
         super(props);
@@ -27,8 +28,8 @@ class SideNavBar extends Component{
                     <li class="active">
                         <a href="#homeSubmenu">Home</a>
                     </li>
-                    <li class="nav-item dropdown"> 
-                        <a href="#classListSubmenu" data-toggle="collapse" class="dropdown-toggle" aria-expanded="false" >Class List</a>          
+                    <li class="dropdown"> 
+                        <a href="#classListSubmenu" data-toggle="collapse" class="dropdown-toggle" aria-expanded="true" >Class List</a>          
                             <ul class="collapse list-unstyled" id="classListSubmenu">
                                 <li>
                                     <a href="#">CS 4850</a>
