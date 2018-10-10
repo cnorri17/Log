@@ -11,9 +11,15 @@ class HomeTeacher extends Component {
     }
     render(){
         return(
-            <div>
-                {/* <SideNav/> */}
-                <HtContent />
+            <div className="container">
+                <div className="row">
+                    <div className="col-1">
+                        <SideNav/>
+                    </div>
+                    <div className="col-3">
+                        <HtContent />
+                    </div>
+                </div>
             </div>
             
         )
