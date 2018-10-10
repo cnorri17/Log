@@ -1,0 +1,15 @@
+"use strict";
+
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
+
+exports.__esModule = true;
+exports.default = void 0;
+
+var _propTypes = _interopRequireDefault(require("prop-types"));
+
+var date = _propTypes.default.oneOfType([_propTypes.default.object, _propTypes.default.string, _propTypes.default.number, _propTypes.default.instanceOf(Date)]);
+
+var _default = {
+  date: date
+};
+exports.default = _default;
