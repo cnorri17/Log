@@ -1,58 +1,91 @@
 import React, { Component} from 'react';
 import './SideNav.css'
+import 'react-dropdown/style.css'
+
 
 
 class SideNavBar extends Component{
-    constructor(props) {
-        super(props);
+    constructor() {
+        super();
+        
         this.state = {
-            collapse: false,
-            isWideEnough: false,
-        };
-    this.onClick = this.onClick.bind(this);
-    }
+          showMenu: false,
+        }
+        
+        this.showMenu = this.showMenu.bind(this);
+        this.closeMenu = this.closeMenu.bind(this);
+      }
 
-    onClick(){
-        this.setState({
-            collapse: !this.state.collapse,
+    showMenu(event) {
+        event.preventDefault();
+    
+        this.setState({ showMenu: true }, () => {
+          document.addEventListener('click', this.closeMenu);
         });
-    }
+      }
+
+      closeMenu() {
+        this.setState({ showMenu: false }, () => {
+          document.removeEventListener('click', this.closeMenu);
+        });
+      }
+      
+    //onClick(){
+        //this.setState({
+            //collapse: !this.state.collapse,
+        //});
+    //}
+
+
     render() {
         return (
+            
             <div class="wrapper">
-            <nav id="sidebar">
-                <div class="sidebar-header">
-                    <h4>Log Menu</h4>
-                </div>
-                <ul class="list-unstyled components">
-                    <li class="active">
-                        <a href="#homeSubmenu">Home</a>
-                    </li>
-                    <li class="dropdown"> 
-                        <a href="#classListSubmenu" data-toggle="collapse" class="dropdown-toggle" aria-expanded="true" >Class List</a>          
-                            <ul class="collapse list-unstyled" id="classListSubmenu">
+                <nav id="sidebar">
+                    <div class="sidebar-header">
+                        <h4>Log Menu</h4>
+                    </div>
+                    <ul class="list-unstyled components">
+                        <li>
+                            <a href="#homeSubmenu">Home</a>
+                        </li>
+                        <li class="active"> 
+                            <a href="#classListSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle" onClick={this.showMenu}>Class Lists</a>          
+                        
+                            {this.state.showMenu
+                            ? (
+                                <div className="ClassLists">
                                 <li>
-                                    <a href="#">CS 4850</a>
+                                    <a href="#a">CS 4850</a>
                                 </li>
                                 <li>
-                                    <a href="#">CS 4514</a>
+                                    <a href="#b">CS 4514</a>
                                 </li>
                                 <li>
-                                    <a href="#">CS 4322</a>
-                                </li>
-                            </ul>
-                    </li>
-                    <li>
-                        <a href="#">Aother menu</a>
-                    </li>
-                    <li>
-                        <a href="#">The other menu</a>
-                    </li>
-                </ul>
-            </nav>
+                                    <a href="#c">CS 4322</a>
+                                </li>      
+                                </div>
+                            )
+                            : (
+                                null
+                            )}
+                            
+                            </li>
+                        <li>
+                            <a href="#">Aother menu</a>
+                        </li>
+                        <li>
+                            <a href="#">The other menu</a>
+                        </li>
+                    </ul>
+                </nav>
+                
+
         </div>
+
         )
     }
 }
+
 
 export default SideNavBar;
