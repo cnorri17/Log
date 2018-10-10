@@ -3,7 +3,6 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@trendmicro/react-sidenav": "^0.4.5",
     "@types/react-dom": "^16.0.8",
     "botstrap": "^0.20.1",
     "jquery": "^3.3.1",
