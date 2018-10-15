@@ -1,6 +1,7 @@
 import React, { Component} from 'react';
 import {Button, Navbar, NavbarBrand, NavbarNav, NavbarToggler, Collapse, NavItem, NavLink, Dropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'mdbreact';
 import mainLogo from '../loglogo.png';
+import './NavBar.css';
 
 class NavBar extends Component{
     constructor(props) {
@@ -28,13 +29,7 @@ class NavBar extends Component{
                         <Collapse isOpen = { this.state.collapse } navbar>
                             <NavbarNav left>
                                 <NavItem active>
-                                    <NavLink to="#">Info</NavLink>
-                                </NavItem>
-                                <NavItem>
-                                    <NavLink to="#"></NavLink>
-                                </NavItem>
-                                <NavItem>
-                                    <NavLink to="#"></NavLink>
+                                    <NavLink to="#" id="info">Info</NavLink>
                                 </NavItem>
                                 <NavItem>
                                     {/* <Dropdown> 
@@ -47,6 +42,7 @@ class NavBar extends Component{
                                     </Dropdown>*/}
                                 </NavItem>
                             </NavbarNav>
+                            
                             <NavbarNav right>
                             <NavItem>
                                 <Button color="yellow">Sign Up</Button>

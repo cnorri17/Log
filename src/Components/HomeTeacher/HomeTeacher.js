@@ -3,6 +3,7 @@ import {  } from 'mdbreact';
 import './HomeTeacher.css';
 import SideNav from '../SideNav/SideNav';
 import HtContent from '../HtContent/HtContent';
+import SideNavR from '../SideNavR/SideNavR';
 
 
 class HomeTeacher extends Component {
@@ -16,11 +17,15 @@ class HomeTeacher extends Component {
                     <div className="col-1">
                         <SideNav/>
                     </div>
+                    <div className="col-2">
+                        <HtContent/>
+                    </div>
                     <div className="col-3">
-                        <HtContent />
+                        <SideNavR/>
                     </div>
                 </div>
             </div>
+            
             
         )
     }

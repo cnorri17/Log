@@ -29,17 +29,10 @@ class SideNavBar extends Component{
           document.removeEventListener('click', this.closeMenu);
         });
       }
-      
-    //onClick(){
-        //this.setState({
-            //collapse: !this.state.collapse,
-        //});
-    //}
-
 
     render() {
         return (
-            <div className="wrapper">
+            <div className="container">
                 <nav id="sidebar">
                     <div className="sidebar-header">
                         <h4>Log Menu</h4>
@@ -54,15 +47,15 @@ class SideNavBar extends Component{
                             {this.state.showMenu
                             ? (
                                 <div className="ClassLists">
-                                <li>
-                                    <a href="#a">CS 4850</a>
-                                </li>
-                                <li>
-                                    <a href="#b">CS 4514</a>
-                                </li>
-                                <li>
-                                    <a href="#c">CS 4322</a>
-                                </li>      
+                                    <li>
+                                        <a href="#a">Get class data</a>
+                                    </li>
+                                    <li>
+                                        <a href="#b">From</a>
+                                    </li>
+                                    <li>
+                                        <a href="#c">Database</a>
+                                    </li>      
                                 </div>
                             )
                             : (
