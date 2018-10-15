@@ -2,6 +2,7 @@ import React, { Component} from 'react';
 import {Button, Navbar, NavbarBrand, NavbarNav, NavbarToggler, Collapse, NavItem, NavLink, Dropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'mdbreact';
 import mainLogo from '../loglogo.png';
 import './NavBar.css';
+import {Link} from 'react-router-dom';
 
 class NavBar extends Component{
     constructor(props) {
@@ -23,7 +24,9 @@ class NavBar extends Component{
                 <div>
                     <Navbar color="yellow darken-2" dark expand="md" scrolling>
                         <NavbarBrand href="#">
-                            <strong><img src={mainLogo} alt="loglogo"></img></strong>
+                            <Link to={{ pathname: `/`}}>
+                                <strong><img src={mainLogo} alt="loglogo"></img></strong>
+                            </Link>
                         </NavbarBrand>
                         { !this.state.isWideEnough && <NavbarToggler onClick = { this.onClick } />}
                         <Collapse isOpen = { this.state.collapse } navbar>

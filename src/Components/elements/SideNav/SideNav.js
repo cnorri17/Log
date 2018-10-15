@@ -64,7 +64,7 @@ class SideNavBar extends Component{
                             
                             </li>
                         <li>
-                            <a href="#">Aother menu</a>
+                            <a href="#">Another menu</a>
                         </li>
                         <li>
                             <a href="#">The other menu</a>

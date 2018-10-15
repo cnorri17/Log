@@ -1,7 +1,7 @@
 .container {
     min-width: 75%;
     max-width: 100%;
-    background-color: white;
+    background-color: #696969;
     min-height: 100vh;
 
 }
@@ -21,18 +21,18 @@
     min-width: 25.00%;
     max-width: 100%; 
     background-color: black;
-    font-family: 'Cabin Sketch', cursiv;
+    font-family: 'Arimo', sans-serif;
 }
 
 .col-1{
     min-width: 17%;
     max-width: 17%;
-    background-color: #fbc02d;
+    ;background-color: #696969;
 }
 .col-2{
     min-width: 70%; 
     max-width: 70%;
-    background-color: skyblue;
+    background-color: white;
 }
 .col-3{
     min-width: 13%;
