@@ -1,0 +1,57 @@
+.container {
+    min-width: 75%;
+    max-width: 100%;
+    background-color: white;
+    min-height: 100vh;
+
+}
+
+/*-- our cleafix hack -- */ 
+.row:before, 
+.row:after {
+    content:"";
+    display: table ;
+    clear:both;
+    min-height: 100vh;
+}
+
+[class*='col-'] {
+    float: left; 
+    min-height: 1px; 
+    min-width: 25.00%;
+    max-width: 100%; 
+    background-color: black;
+    font-family: 'Cabin Sketch', cursiv;
+}
+
+.col-1{
+    min-width: 17%;
+    max-width: 17%;
+    background-color: #fbc02d;
+}
+.col-2{
+    min-width: 70%; 
+    max-width: 70%;
+    background-color: skyblue;
+}
+.col-3{
+    min-width: 13%;
+    max-width: 13%; 
+    background-color: white;
+}
+
+
+
+.outline, .outline *{
+    outline: 1px solid #F6A1A1; 
+}
+
+/*-- some extra column content styling --*/
+[class*='col-'] > p {
+ background-color: #FFC2C2; 
+ padding: 0;
+ margin: 0;
+ text-align: center; 
+ color: white; 
+}
+
