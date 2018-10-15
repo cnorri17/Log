@@ -1,33 +1,33 @@
-import React, { Component } from 'react';
-// import {  } from 'mdbreact';
-import './HomeTeacher.css';
+import React, {Component} from 'react';
+import './HomeStudent.css';
+import '../HomeTeacher/HomeTeacher.css';
 import SideNav from '../elements/SideNav/SideNav';
-import HtContent from '../elements/HtContent/HtContent';
+import StContent from '../elements/StContent/StContent';
 import SideNavR from '../elements/SideNavR/SideNavR';
 
 
-class HomeTeacher extends Component {
+class HomeStudent extends Component {
     state = {
-        homeValue: 'Teacher'
+        homeValue: 'student'
     }
-    render(){
-        return(
+
+    render() {
+        return (
             <div className="container">
                 <div className="row">
                     <div className="col-1">
                         <SideNav/>
                     </div>
                     <div className="col-2">
-                        <HtContent/>
+                        <StContent />
                     </div>
                     <div className="col-3">
-                        <SideNavR homeValue={this.state.homeValue}/>
+                        <SideNavR homeValue='Student'/>
                     </div>
                 </div>
             </div>
-            
         )
     }
 }
 
-export default HomeTeacher; 
+export default HomeStudent;

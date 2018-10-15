@@ -1,11 +1,12 @@
 
 import React, { Component } from 'react';
 import logo from './logo.svg';
-import { BrowserRouter as Router } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import './App.css';
 import NavBar from './Components/NavBar/NavBar'
 import CardLogin from './Components/CardLogin/CardLogin'
 import HomeTeacher from './Components/HomeTeacher/HomeTeacher'
+import HomeStudent from './Components/HomeStudent/HomeStudent'
 
 // class App extends Component {
 //   render() {
@@ -23,28 +24,30 @@ import HomeTeacher from './Components/HomeTeacher/HomeTeacher'
 //   }
 // }
 
-const App = () => {
-  return(
-    <Router>
-      <div>
-        <NavBar /> 
-        {/* <CardLogin /> */}
-        <HomeTeacher/>
-      </div>
-    </Router>
-  )
+class App extends Component {
+  state = {
+    loggedIn: false
+  }
+
+  render() {
+    return(
+      <Router>
+        <React.Fragment>
+          <NavBar /> 
+          <Switch>
+              <Route path="/loggin" component={CardLogin} exact />
+              <Route path="/Student" component={HomeStudent} exact />
+              <Route path="/Teacher" component={HomeTeacher} exact />
+          </Switch>
+          {/* <CardLogin /> */}
+          {/* <HomeTeacher/> */}
+          {/* <HomeStudent /> */}
+        </React.Fragment>
+      </Router>
+    )
+  }
 
 }
 
-
-// import React from 'react';
-// import ReactDOM from 'react-dom';
-// import App from './App';
-// import registerServiceWorker from './registerServiceWorker';
-// import './index.css';
-
-// var element = React.createElement('h1', { className: 'greeting' }, 'Hello, world!');
-// ReactDOM.render(element, document.getElementById('root'));
-// registerServiceWorker();
 
 export default App;

@@ -1,7 +1,6 @@
 import React, { Component} from 'react';
 import './HtContent.css';
 import StudentList from '../StudentList/StudentList';
-import '../HomeTeacher/HomeTeacher.css';
 
 
 
@@ -12,7 +11,7 @@ class HtContent extends Component {
 
     render() {
         return (
-            <div className="studentLists">
+            <div>
                 <StudentList list={this.state.list}/>
             </div>
             
