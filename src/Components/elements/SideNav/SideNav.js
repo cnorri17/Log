@@ -35,26 +35,23 @@ class SideNavBar extends Component{
             <div className="container">
                 <nav id="sidebar">
                     <div className="sidebar-header">
-                        <h4>Log Menu</h4>
+                        <h4>Class Lists</h4>
                     </div>
                     <ul className="list-unstyled components">
-                        <li>
-                            <a href="#homeSubmenu">Home</a>
-                        </li>
                         <li className="active"> 
-                            <a href="#classListSubmenu" data-toggle="collapse" aria-expanded="false" className="dropdown-toggle" onClick={this.showMenu}>Class Lists</a>          
+                            <a href="#classListSubmenu" data-toggle="collapse" aria-expanded="false" className="dropdown-toggle" onClick={this.showMenu}>CS 1301</a>          
                         
                             {this.state.showMenu
                             ? (
                                 <div className="ClassLists">
                                     <li>
-                                        <a href="#a">Get class data</a>
+                                        <a href="/teacher">Section 1</a>
                                     </li>
                                     <li>
-                                        <a href="#b">From</a>
+                                        <a href="#b">Section 2</a>
                                     </li>
                                     <li>
-                                        <a href="#c">Database</a>
+                                        <a href="#c">Section 3</a>
                                     </li>      
                                 </div>
                             )
@@ -63,12 +60,6 @@ class SideNavBar extends Component{
                             )}
                             
                             </li>
-                        <li>
-                            <a href="#">Another menu</a>
-                        </li>
-                        <li>
-                            <a href="#">The other menu</a>
-                        </li>
                     </ul>
                 </nav>
             </div>
