@@ -7,6 +7,7 @@ import NavBar from './Components/NavBar/NavBar'
 import CardLogin from './Components/CardLogin/CardLogin'
 import HomeTeacher from './Components/HomeTeacher/HomeTeacher'
 import HomeStudent from './Components/HomeStudent/HomeStudent'
+import SignUp from './Components/SignUpPage/SignUp'
 
 // class App extends Component {
 //   render() {
@@ -38,6 +39,7 @@ class App extends Component {
               <Route path="/loggin" component={CardLogin} exact />
               <Route path="/Student" component={HomeStudent} exact />
               <Route path="/Teacher" component={HomeTeacher} exact />
+              <Route path="/SignUp" component={SignUp} exact />
           </Switch>
           {/* <CardLogin /> */}
           {/* <HomeTeacher/> */}

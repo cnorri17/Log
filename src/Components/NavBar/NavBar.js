@@ -48,7 +48,7 @@ class NavBar extends Component{
                             
                             <NavbarNav right>
                             <NavItem>
-                                <Button color="yellow">Sign Up</Button>
+                                <Link to = "/signUp"><Button color="yellow">Sign Up</Button></Link>
                             </NavItem>
                             </NavbarNav>
                         </Collapse>

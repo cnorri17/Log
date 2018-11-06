@@ -1,6 +1,7 @@
 import React, { Component} from 'react';
 import './SideNav.css'
 import 'react-dropdown/style.css'
+import ClassName from './ClassName'
 
 
 
@@ -10,6 +11,7 @@ class SideNavBar extends Component{
         
         this.state = {
           showMenu: false,
+          teacherView: true,
         }
         
         this.showMenu = this.showMenu.bind(this);
