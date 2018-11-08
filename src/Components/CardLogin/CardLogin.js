@@ -10,7 +10,7 @@ class CardLogin extends Component {
                     <Card className="cardlogin">
                         <CardBody >
                             <form>
-                                <p className="h4 yellow darken-2 white-text text-center py-4" style={{paddingRight:'11%'}}> <img src={mainLogo} alt="loglogo"></img>Log In</p>
+                                <p className="h4 yellow darken-2 white-text text-center py-4" style={{paddingRight:'0%'}}> {/*<img src={mainLogo} alt="loglogo"></img>*/}Log In</p>
                                 <div className="grey-text">
                                     <Input label="Your email" icon="envelope-o" group type="email" validate error="wrong" success="right"/>
                                     <Input label="Your password" icon="lock" group type="password" validate/>

@@ -11,7 +11,7 @@ class HtContent extends Component {
 
     render() {
         return (
-            <div>
+            <div className = 'divStuff'>
                 <StudentList list={this.state.list}/>
             </div>
             

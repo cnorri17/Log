@@ -4,4 +4,5 @@ Button {
 
 #info {
     font-family: 'Cabin Sketch', cursive;
+    border-radius: 25%;
 }
