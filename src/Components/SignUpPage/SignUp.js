@@ -17,10 +17,16 @@ class SignUp extends Component {
 
                                     <InputPage/>
 
-                                    <Input label="Email" group type="email" validate error="wrong" success="right"/>
-                                    <Input label="Password" group type="password" validate/>
-                                    <Input label="First Name" />
-                                    <Input label="Last Name" />
+                                    <Input label="Email" group type="email" icon="envelope-o" validate error="wrong" success="right"/>
+                                    <Input label="Password" group type="password" icon="lock" validate/>
+                                    <Input label="First Name" icon='user-circle' />
+                                    <div style={{paddingTop: '1px'}}>
+
+                                        <Input label="Last Name" icon='user-circle-o' />
+
+                                    </div>
+                                    
+                                        
                                 </div>
 
                                 <div className="text-center py-4 mt-3">
