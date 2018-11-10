@@ -1,15 +1,26 @@
 import React, { Component } from 'react';
 // import {  } from 'mdbreact';
-import './HomeTeacher.css';
+import './Home.css';
 import SideNav from '../elements/SideNav/SideNav';
 import HtContent from '../elements/HtContent/HtContent';
+import StContent from '../elements/StContent/StContent';
 import SideNavR from '../elements/SideNavR/SideNavR';
 
 
 class HomeTeacher extends Component {
     state = {
-        homeValue: 'Teacher'
+        userType: 'student'
     }
+
+    RenderHome(){
+        const homeType = this.state.userType
+        if (homeType == 'teacher'){
+            return <HtContent/>
+        } else{
+            return <StContent/>
+        }
+    }
+
     render(){
         return(
             <div className="container">
@@ -18,7 +29,7 @@ class HomeTeacher extends Component {
                         <SideNav/>
                     </div>
                     <div className="col-2">
-                        <HtContent/>
+                        {this.RenderHome()}
                     </div>
                     <div className="col-3">
                         <SideNavR homeValue={this.state.homeValue}/>
