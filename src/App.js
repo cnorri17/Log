@@ -5,8 +5,8 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import './App.css';
 import NavBar from './Components/NavBar/NavBar'
 import CardLogin from './Components/CardLogin/CardLogin'
-import HomeTeacher from './Components/HomeTeacher/HomeTeacher'
-import HomeStudent from './Components/HomeStudent/HomeStudent'
+import Home from './Components/Home/Home'
+import SignUp from './Components/SignUpPage/SignUp'
 
 // class App extends Component {
 //   render() {
@@ -26,7 +26,7 @@ import HomeStudent from './Components/HomeStudent/HomeStudent'
 
 class App extends Component {
   state = {
-    loggedIn: false
+    isLoggedIn: false
   }
 
   render() {
@@ -36,8 +36,10 @@ class App extends Component {
           <NavBar /> 
           <Switch>
               <Route path="/loggin" component={CardLogin} exact />
-              <Route path="/Student" component={HomeStudent} exact />
-              <Route path="/Teacher" component={HomeTeacher} exact />
+              {/* <Route path="/Student" component={HomeStudent} exact />
+              <Route path="/Teacher" component={HomeTeacher} exact /> */}
+              <Route path="/Home" component={Home} exact/>
+              <Route path="/SignUp" component={SignUp} exact />
           </Switch>
           {/* <CardLogin /> */}
           {/* <HomeTeacher/> */}
