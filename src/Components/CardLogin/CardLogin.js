@@ -16,7 +16,7 @@ class CardLogin extends Component {
                                     <Input label="password" icon="lock" group type="password" validate/>
                                 </div>
                                 <div className="text-center py-4 mt-3">
-                                    <Button color="yellow darken-2" type="submit">Sign In</Button>
+                                    <Button color="blue" type="submit">Sign In</Button>
                                 </div>
                             </form>
                         </CardBody>

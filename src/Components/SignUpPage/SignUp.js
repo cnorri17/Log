@@ -30,7 +30,7 @@ class SignUp extends Component {
                                 </div>
 
                                 <div className="text-center py-4 mt-3">
-                                    <Button color="yellow darken-2" type="submit">Done!</Button>
+                                    <Button color="blue" type="submit">Done!</Button>
                                 </div>
 
                             </form>
