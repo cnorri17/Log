@@ -21,7 +21,7 @@ class CardLogin extends Component {
                             </form>
                         </CardBody>
                     </Card>
-                    <script src="jquery/jquery.js"></script>
+                <script src="jquery/jquery.js"></script>
                 <script type="text/javascript" src='js/bootstrap.min.js'></script>
                 <link rel="stylesheet" href="css/bootstrap.css" />
                 </div>
