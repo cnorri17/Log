@@ -1,10 +1,10 @@
 import React, { Component} from 'react';
 import {Button, Navbar, NavbarBrand, NavbarNav, NavbarToggler, Collapse, NavItem, NavLink, Dropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'mdbreact';
 import mainLogo from '../loglogo.png';
-import './NavBar.css';
+import '../NavBar/NavBar.css';
 import {Link} from 'react-router-dom';
 
-class NavBar extends Component{
+class NavBarAccountSet extends Component{
     constructor(props) {
         super(props);
         this.state = {
@@ -42,12 +42,11 @@ class NavBar extends Component{
                                     </Dropdown>*/}
                                 </NavItem>
                             </NavbarNav>
-                            
+
                             <NavbarNav right>
-                            <NavItem>
-                                <Link to = "/signUp"><Button color="black">Sign Up</Button></Link>
-                                <Link to = "/loggin"><Button color="black">Login</Button></Link>
-                            </NavItem>
+                                <NavItem>
+                                    <Button href='#' color='blue'><i class="fa fa-gear" aria-hidden="true"></i> Setings</Button>
+                                </NavItem>
                             </NavbarNav>
                         </Collapse>
                     </Navbar>
@@ -56,4 +55,4 @@ class NavBar extends Component{
     }
 }
 
-export default NavBar;
+export default NavBarAccountSet;

@@ -23,6 +23,7 @@ class HomeTeacher extends Component {
 
     render(){
         return(
+
             <div className="container">
                 <div className="row">
                     <div className="col-1">
