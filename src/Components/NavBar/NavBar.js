@@ -31,9 +31,6 @@ class NavBar extends Component{
                         { !this.state.isWideEnough && <NavbarToggler onClick = { this.onClick } />}
                         <Collapse isOpen = { this.state.collapse } navbar>
                             <NavbarNav left>
-                                <NavItem active>
-                                    <NavLink to="#" id="info">Info</NavLink>
-                                </NavItem>
                                 <NavItem>
                                     {/* <Dropdown> 
                                         <DropdownToggle nav caret>Others</DropdownToggle>
@@ -48,7 +45,8 @@ class NavBar extends Component{
                             
                             <NavbarNav right>
                             <NavItem>
-                                <Button color="yellow">Sign Up</Button>
+                                <Link to = "/signUp"><Button color="black">Sign Up</Button></Link>
+                                <Link to = "/loggin"><Button color="black">Login</Button></Link>
                             </NavItem>
                             </NavbarNav>
                         </Collapse>
