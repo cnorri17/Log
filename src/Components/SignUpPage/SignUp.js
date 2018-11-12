@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { Input, Button, Card, CardBody} from 'mdbreact';
-import mainLogo from '../loglogo.png';
 import InputPage from '../elements/RadioButton'
 import '../CardLogin/CardLogin.css'
 
@@ -12,7 +11,7 @@ class SignUp extends Component {
                     <Card className="cardlogin">
                         <CardBody >
                             <form>
-                                <p className="h4 yellow darken-2 white-text text-center py-4" style={{paddingRight:'0%'}}> {/*<img src={mainLogo} alt="loglogo"></img>*/}Sign Up</p>
+                                <p className="h4 yellow darken-2 white-text text-center py-4" style={{paddingRight:'0%'}}> {/*<img src={mainLogo} alt="loglogo"></img>*/}SIGN UP</p>
                                 <div className="grey-text">
 
                                     <InputPage/>
@@ -30,7 +29,7 @@ class SignUp extends Component {
                                 </div>
 
                                 <div className="text-center py-4 mt-3">
-                                    <Button color="blue" type="submit">Done!</Button>
+                                    <Button color="black" type="submit">SIGN UP</Button>
                                 </div>
 
                             </form>
@@ -38,10 +37,6 @@ class SignUp extends Component {
                     </Card>
 
 
-
-
-
-                    
                 <script src="jquery/jquery.js"></script>
                 <script type="text/javascript" src='js/bootstrap.min.js'></script>
                 <link rel="stylesheet" href="css/bootstrap.css" />
