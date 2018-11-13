@@ -2,7 +2,7 @@ import React, { Component} from 'react';
 import { Input, Button, Card, CardBody, radio3, FormInline} from 'mdbreact';
 
 
-
+//wtfisthisguysaying
 
 class InputPage extends React.Component {
   constructor(props) {
