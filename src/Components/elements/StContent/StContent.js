@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import './StContent.css';
+import AttendanceRate from '../AttendanceRate/AttendanceRate'
 
 class StContent extends Component {
     state = {
@@ -7,13 +8,20 @@ class StContent extends Component {
     }
 
     renderClasses = () => {
-        const classElements = classList.map( (element, i) => {
+        const classElements = this.state.classList.map( (element, i) => {
             return (
                 <div key={i}>
                     {element}
+                    <AttendanceRate rate={this.getAttendanceRate(this.key)}/>
                 </div>
             )
         })
+    }
+
+    getAttendanceRate(item){
+        //fetch attendance rate with 
+        //store into a variable
+        //return attendance rate variable as an int/string
     }
 
     render() {
