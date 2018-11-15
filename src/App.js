@@ -4,7 +4,7 @@ import logo from './logo.svg';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import './App.css';
 import NavBar from './Components/NavBar/NavBar'
-import CardLogin from './Components/CardLogin/CardLogin'
+import LoginPage from './Components/LoginPage/LoginPage'
 import Home from './Components/Home/Home'
 import SignUp from './Components/SignUpPage/SignUp'
 
@@ -35,7 +35,7 @@ class App extends Component {
         <React.Fragment>
           <NavBar /> 
           <Switch>
-              <Route path="/loggin" component={CardLogin} exact />
+              <Route path="/loggin" component={LoginPage} exact />
               {/* <Route path="/Student" component={HomeStudent} exact />
               <Route path="/Teacher" component={HomeTeacher} exact /> */}
               <Route path="/Home" component={Home} exact/>
