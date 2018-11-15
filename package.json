@@ -5,6 +5,7 @@
   "dependencies": {
     "@types/react-dom": "^16.0.8",
     "botstrap": "^0.20.1",
+    "firebase": "^5.5.8",
     "jquery": "^3.3.1",
     "mdbreact": "^4.8.0",
     "popper.js": "^1.11.0",
