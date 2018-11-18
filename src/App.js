@@ -4,11 +4,10 @@ import {Redirect} from 'react-router-dom'
 import logo from './logo.svg';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import './App.css';
-import NavBar from './Components/NavBar/NavBar';
-import CardLogin from './Components/CardLogin/CardLogin';
-import Home from './Components/Home/Home';
-import SignUp from './Components/SignUpPage/SignUp';
-// import TestSignUp from './Components/SignUpPage/TestSignUp';
+import NavBar from './Components/NavBar/NavBar'
+import LoginPage from './Components/LoginPage/LoginPage'
+import Home from './Components/Home/Home'
+import SignUp from './Components/SignUpPage/SignUp'
 
 // class App extends Component {
 //   render() {
@@ -62,7 +61,7 @@ class App extends Component {
         <React.Fragment>
           <NavBar /> 
           <Switch>
-              <Route path="/login" component={CardLogin} exact />
+              <Route path="/loggin" component={LoginPage} exact />
               {/* <Route path="/Student" component={HomeStudent} exact />
               <Route path="/Teacher" component={HomeTeacher} exact /> */}
               <Route path="/Home" component={Home} exact/>
