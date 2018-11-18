@@ -5,6 +5,12 @@ import '../CardLogin/CardLogin.css'
 
 
 class SignUp extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            value: ''
+        }
+    }
     render() {
         return (
                 <div  style={{display: 'flex',  justifyContent:'center', alignItems:'center', height: '50%'}}>
