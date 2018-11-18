@@ -1,12 +1,14 @@
 
 import React, { Component } from 'react';
+import {Redirect} from 'react-router-dom'
 import logo from './logo.svg';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import './App.css';
-import NavBar from './Components/NavBar/NavBar'
-import CardLogin from './Components/CardLogin/CardLogin'
-import Home from './Components/Home/Home'
-import SignUp from './Components/SignUpPage/SignUp'
+import NavBar from './Components/NavBar/NavBar';
+import CardLogin from './Components/CardLogin/CardLogin';
+import Home from './Components/Home/Home';
+import SignUp from './Components/SignUpPage/SignUp';
+// import TestSignUp from './Components/SignUpPage/TestSignUp';
 
 // class App extends Component {
 //   render() {
@@ -23,10 +25,35 @@ import SignUp from './Components/SignUpPage/SignUp'
 //     );
 //   }
 // }
+var firebase = require('firebase')
 
 class App extends Component {
-  state = {
-    isLoggedIn: false
+  constructor(props){
+    super(props);
+    this.state = {
+      isLoggedin: false
+    }
+    
+  }
+
+  componentDidMount() {
+    this.authListener();
+  }
+
+  authListener(){
+    firebase.auth().onAuthStateChanged((user) => {
+      if (user) {
+        this.setState({isLoggedin: true})
+      } else{
+        this.setState({isLoggedin: false})
+      }
+    })
+  }
+
+  renderRedirect(){
+    if(this.state.isLoggedin){
+      return 
+    }
   }
 
   render() {
@@ -35,7 +62,7 @@ class App extends Component {
         <React.Fragment>
           <NavBar /> 
           <Switch>
-              <Route path="/loggin" component={CardLogin} exact />
+              <Route path="/login" component={CardLogin} exact />
               {/* <Route path="/Student" component={HomeStudent} exact />
               <Route path="/Teacher" component={HomeTeacher} exact /> */}
               <Route path="/Home" component={Home} exact/>
