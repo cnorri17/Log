@@ -4,7 +4,7 @@ import { Input, Button, Card, CardBody} from 'mdbreact';
 import InputPage from '../elements/RadioButton'
 import '../CardLogin/CardLogin.css'
 
-var firebase = require('firebase')
+var firebase = require('firebase');
 
 class SignUp extends Component {
     constructor(props) {
@@ -14,13 +14,17 @@ class SignUp extends Component {
             password: '',
             firstName: '',
             lastName: '',
-            redirect: false
+            // redirect: false
         }
 
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
-        this.renderRedirect = this.renderRedirect.bind(this);
+        // this.renderRedirect = this.renderRedirect.bind(this);
     }
+
+    // componentDidMount() {
+    //     this.setState({ redirect: false})
+    // }
 
     handleChange(event) {
         const target = event.target;
@@ -34,16 +38,18 @@ class SignUp extends Component {
     handleSubmit(event) {
         event.preventDefault();
         // alert('You have created an account with values' + this.state.email + '' + this.state.password + '' + this.state.firstName + '' + this.state.lastName);
-        var success = '';
         firebase.auth().createUserWithEmailAndPassword(this.state.email,this.state.password)
             .then(result => {
                 console.log(result);
+                alert('Hey you made an account.')
+                // firebase.auth().signOut();
+                // this.render(<Redirect to='/Home'/>);
             })
             .catch(function(error) {
                 var errorCode=error.code;
                 var errorMessage= error.message;
 
-                if (errorCode == 'auth/weak-password'){
+                if (errorCode === 'auth/weak-password'){
                     alert('The password is too weak.');
                     // event.preventDefault();
                 }else {
@@ -57,25 +63,24 @@ class SignUp extends Component {
         
     }
 
-    
 
-    renderRedirect = () => {
-        if (this.state.redirect) {
-            return <Redirect to='/login' />
-        }
-    }
+    // renderRedirect = () => {
+    //     if (this.state.redirect) {
+    //         return <Redirect to='/login' />
+    //     }
+    // }
 
     render() {
         return (
                 <div  style={{display: 'flex',  justifyContent:'center', alignItems:'center', height: '50%'}}>
                     <Card className="cardlogin">
                         <CardBody >
+                            <p className="h4 yellow darken-2 white-text text-center py-4" style={{paddingRight:'0%'}}> {/*<img src={mainLogo} alt="loglogo"></img>*/}SIGN UP</p>
+                            <InputPage/>
                             <form onSubmit={this.handleSubmit}>
-                                <p className="h4 yellow darken-2 white-text text-center py-4" style={{paddingRight:'0%'}}> {/*<img src={mainLogo} alt="loglogo"></img>*/}SIGN UP</p>
                                 <div className="grey-text">
 
-                                    <InputPage/>
-
+                    
                                     <Input 
                                         name="email" 
                                         label="Email" 
@@ -98,6 +103,7 @@ class SignUp extends Component {
                                     <Input 
                                         name="firstName" 
                                         label="First Name" 
+                                        type='text'
                                         icon='user-circle'
                                         value={this.state.firstName}
                                         onChange={this.handleChange}
@@ -107,6 +113,7 @@ class SignUp extends Component {
                                         <Input 
                                             name="lastName" 
                                             label="Last Name" 
+                                            type='text'
                                             icon='user-circle-o' 
                                             value={this.state.lastName}
                                             onChange={this.handleChange}
@@ -124,7 +131,7 @@ class SignUp extends Component {
                             </form>
                         </CardBody>
                     </Card>
-                {this.renderRedirect}
+                {/* {this.renderRedirect()} */}
 
                 <script src="jquery/jquery.js"></script>
                 <script type="text/javascript" src='js/bootstrap.min.js'></script>

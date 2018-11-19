@@ -4,14 +4,43 @@ import mainLogo from '../loglogo.png';
 import './NavBar.css';
 import {Link} from 'react-router-dom';
 
+var firebase = require('firebase');
+
 class NavBar extends Component{
     constructor(props) {
         super(props);
         this.state = {
             collapse: false,
             isWideEnough: false,
+            isLoggedin: null
         };
     this.onClick = this.onClick.bind(this);
+    // this.renderNavButtons = this.renderNavButtons.bind(this);
+    this.signOut = this.signOut.bind(this);
+    }
+
+
+    // renderNavButtons(){
+    //     const isLoggedin = this.props.user;
+    //     if (isLoggedin){
+    //         return(
+    //             <NavItem>
+    //                 <Link to = "/login"><Button color="black" onClick={this.signOut()}>Log Out</Button></Link>
+    //             </NavItem>
+    //         )
+    //     } 
+    //     else{
+    //         return(
+    //             <NavItem>
+    //                 <Link to = "/signUp"><Button color="black">Sign Up</Button></Link>
+    //                 <Link to = "/login"><Button color="black">Login</Button></Link>
+    //             </NavItem>
+    //         )
+    //     }
+    // }
+
+    signOut(){
+        firebase.auth().signOut();
     }
 
     onClick(){
@@ -23,11 +52,11 @@ class NavBar extends Component{
         return (
                 <div>
                     <Navbar color="yellow darken-2" dark expand="md" scrolling>
-                        <NavbarBrand href="#">
+                        {/* <NavbarBrand> */}
                             <Link to={{ pathname: `/`}}>
                                 <strong><img src={mainLogo} alt="loglogo"></img></strong>
                             </Link>
-                        </NavbarBrand>
+                        {/* </NavbarBrand> */}
                         { !this.state.isWideEnough && <NavbarToggler onClick = { this.onClick } />}
                         <Collapse isOpen = { this.state.collapse } navbar>
                             <NavbarNav left>
@@ -44,10 +73,19 @@ class NavBar extends Component{
                             </NavbarNav>
                             
                             <NavbarNav right>
-                            <NavItem>
-                                <Link to = "/signUp"><Button color="black">Sign Up</Button></Link>
-                                <Link to = "/loggin"><Button color="black">Login</Button></Link>
-                            </NavItem>
+                                    <NavItem>
+                                        {this.props.user !== null ?
+                                            <Link to = "/login"><Button color="black" onClick={this.signOut()}>Log Out</Button></Link>
+                                            
+                                            :
+                                            <div>
+                                            <Link to = "/signUp">
+                                                <Button color="black">Sign Up</Button>
+                                            </Link>
+                                            <Link to = "/login"><Button color="black">Login</Button></Link>
+                                            </div> 
+                                        }
+                                    </NavItem>
                             </NavbarNav>
                         </Collapse>
                     </Navbar>
