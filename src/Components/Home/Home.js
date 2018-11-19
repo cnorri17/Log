@@ -5,11 +5,18 @@ import SideNav from '../elements/SideNav/SideNav';
 import HtContent from '../elements/HtContent/HtContent';
 import StContent from '../elements/StContent/StContent';
 import SideNavR from '../elements/SideNavR/SideNavR';
+import {firebase} from '../../fbConfig'
 
 
 class HomeTeacher extends Component {
     state = {
         userType: 'student'
+    }
+
+    componentDidMount () {
+        if (firebase.auth().currentUser === null) {
+            
+        }
     }
 
     RenderHome(){

@@ -4,7 +4,9 @@ import { Input, Button, Card, CardBody} from 'mdbreact';
 import InputPage from '../elements/RadioButton'
 import '../CardLogin/CardLogin.css'
 
-var firebase = require('firebase');
+// var firebase = require('firebase/auth');
+import {auth} from '../../fbConfig.js'
+
 
 class SignUp extends Component {
     constructor(props) {
@@ -27,20 +29,19 @@ class SignUp extends Component {
     // }
 
     handleChange(event) {
-        const target = event.target;
-        const value = target.value;
-        const name = target.name;
+        // const target = event.target;
+        // const value = target.value;
+        // const name = target.name;
         this.setState({
-            [name]: value
+            [event.target.name]: event.target.value
         });
     }
 
     handleSubmit(event) {
-        event.preventDefault();
         // alert('You have created an account with values' + this.state.email + '' + this.state.password + '' + this.state.firstName + '' + this.state.lastName);
-        firebase.auth().createUserWithEmailAndPassword(this.state.email,this.state.password)
-            .then(result => {
-                console.log(result);
+        auth.createUserWithEmailAndPassword(this.state.email,this.state.password)
+            .then(user => {
+                // console.log(user);
                 alert('Hey you made an account.')
                 // firebase.auth().signOut();
                 // this.render(<Redirect to='/Home'/>);
@@ -59,7 +60,7 @@ class SignUp extends Component {
                 
                 console.log(error);
             });
-        
+        event.preventDefault();
         
     }
 
@@ -71,6 +72,9 @@ class SignUp extends Component {
     // }
 
     render() {
+        if (this.props.user){
+            return(<Redirect to='/Home'/>)
+        }
         return (
                 <div  style={{display: 'flex',  justifyContent:'center', alignItems:'center', height: '50%'}}>
                     <Card className="cardlogin">

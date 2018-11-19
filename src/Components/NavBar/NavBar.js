@@ -2,9 +2,10 @@ import React, { Component} from 'react';
 import {Button, Navbar, NavbarBrand, NavbarNav, NavbarToggler, Collapse, NavItem, NavLink, Dropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'mdbreact';
 import mainLogo from '../loglogo.png';
 import './NavBar.css';
-import {Link} from 'react-router-dom';
+import {Link, Redirect} from 'react-router-dom';
 
-var firebase = require('firebase');
+// var firebase = require('firebase');
+import {auth} from '../../fbConfig'
 
 class NavBar extends Component{
     constructor(props) {
@@ -12,36 +13,20 @@ class NavBar extends Component{
         this.state = {
             collapse: false,
             isWideEnough: false,
-            isLoggedin: null
         };
     this.onClick = this.onClick.bind(this);
-    // this.renderNavButtons = this.renderNavButtons.bind(this);
     this.signOut = this.signOut.bind(this);
     }
 
 
-    // renderNavButtons(){
-    //     const isLoggedin = this.props.user;
-    //     if (isLoggedin){
-    //         return(
-    //             <NavItem>
-    //                 <Link to = "/login"><Button color="black" onClick={this.signOut()}>Log Out</Button></Link>
-    //             </NavItem>
-    //         )
-    //     } 
-    //     else{
-    //         return(
-    //             <NavItem>
-    //                 <Link to = "/signUp"><Button color="black">Sign Up</Button></Link>
-    //                 <Link to = "/login"><Button color="black">Login</Button></Link>
-    //             </NavItem>
-    //         )
-    //     }
-    // }
+
 
     signOut(){
-        firebase.auth().signOut();
+        auth.signOut();
+        <Redirect to='/login'/>
     }
+
+
 
     onClick(){
         this.setState({
@@ -73,19 +58,22 @@ class NavBar extends Component{
                             </NavbarNav>
                             
                             <NavbarNav right>
+                                {this.props.user !== null ?
                                     <NavItem>
-                                        {this.props.user !== null ?
-                                            <Link to = "/login"><Button color="black" onClick={this.signOut()}>Log Out</Button></Link>
-                                            
-                                            :
-                                            <div>
-                                            <Link to = "/signUp">
-                                                <Button color="black">Sign Up</Button>
-                                            </Link>
-                                            <Link to = "/login"><Button color="black">Login</Button></Link>
-                                            </div> 
-                                        }
+                                        <Button color="black" onClick={this.signOut}>Log Out</Button>
                                     </NavItem>
+                                    :
+                                    <NavItem>
+                                    <Link to = "/signUp">
+                                        <Button color="black">Sign Up</Button>
+                                    </Link>
+                                    
+                                    {/* <Button color="black"><Link to = "/signUp">Sign Up</Link></Button>
+                                    <Button color="black"><Link to = "/login">Login</Link></Button> */}
+                                    <Link to = "/login"><Button color="black">Login</Button></Link>
+                                    </NavItem>
+                                }
+                                    
                             </NavbarNav>
                         </Collapse>
                     </Navbar>

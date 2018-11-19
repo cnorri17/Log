@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import {Redirect} from 'react-router-dom';
 import { Input, Button, Card, CardBody} from 'mdbreact';
-import mainLogo from '../loglogo.png';
+// import mainLogo from '../loglogo.png';
 import './CardLogin.css'
+import {firebase} from '../../fbConfig.js'
 
-var firebase = require('firebase');
+// var firebase = require('firebase/app');
 class CardLogin extends Component {
     constructor(props){
         super(props);
@@ -23,33 +24,33 @@ class CardLogin extends Component {
     // }
 
     handleChange(event) {
-        const target = event.target;
-        const value = target.value;
-        const name = target.name;
+        // const target = event.target;
+        // const value = target.value;
+        // const name = target.name;
         this.setState({
-            [name]: value
+            [event.target.name]: event.target.value
         })
     }
 
     handleSubmit(event) {
-        event.preventDefault();
-        // firebase.auth().signInWithEmailAndPassword(this.state.email, this.state.password)
-        //     .then(result => {
-        //         console.log(result);
-        //         alert('You have logged in!');
-        //         this.setState({ redirect: true})
-        //     })
-        //     .catch(function(error) {
-        //         var errorCode = error.code;
-        //         var errorMessage = error.message;
+        firebase.auth().signInWithEmailAndPassword(this.state.email, this.state.password)
+            // .then(result => {
+            //     console.log(result);
+            //     // alert('You have logged in!');
+            //     // this.setState({ redirect: true})
+            // })
+            .catch(function(error) {
+                var errorCode = error.code;
+                var errorMessage = error.message;
 
-        //         if (errorCode === 'auth/wrong-password') {
-        //             alert('Wrong password.');
-        //         } else {
-        //             alert('ErrorCode: ' + errorCode + '\nErrorMessage: ' + errorMessage);
-        //         }
-        //         console.log(error);
-        //     });
+                if (errorCode === 'auth/wrong-password') {
+                    alert('Wrong password.');
+                } else {
+                    alert('ErrorCode: ' + errorCode + '\nErrorMessage: ' + errorMessage);
+                }
+                console.log(error);
+            });
+        event.preventDefault();
     }
 
     // renderRedirect = () => {
@@ -59,8 +60,14 @@ class CardLogin extends Component {
     // }
 
     render() {
+        // if (this.props.user) {
+        //     return(<Redirect to='/Home'/>)
+        // }
+
+        if (firebase.auth().currentUser) {
+            return(<Redirect to='/Home'/>)
+        }
         return (
-                
                 <div  style={{display: 'flex',  justifyContent:'center', alignItems:'center', height: '50%'}}>
                     {/* {this.renderRedirect()} */}
                     <Card className="cardlogin">
