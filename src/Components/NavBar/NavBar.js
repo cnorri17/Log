@@ -13,10 +13,19 @@ class NavBar extends Component{
         this.state = {
             collapse: false,
             isWideEnough: false,
+            show: false,
         };
     this.onClick = this.onClick.bind(this);
     this.signOut = this.signOut.bind(this);
     }
+
+    showModal = () => {
+        this.setState({show: true});
+    };
+
+    hideModal = () => {
+        this.setState({show: false});
+    };
 
     signOut(){
         firebase.auth().signOut();
@@ -55,7 +64,13 @@ class NavBar extends Component{
                             
                             <NavbarNav right>
                                 {this.props.user !== null ?
+                                    
                                     <NavItem>
+                                        <Modal show={this.state.show} handleClose={this.hideModal}>
+                                            <p>Modal</p>
+                                            <p>Data</p>
+                                        </Modal>
+                                        <Button color="black" onClick={this.showModal} >Create New Class</Button>
                                         <Button color="black" onClick={this.signOut}>Log Out</Button>
                                     </NavItem>
                                     :
@@ -71,5 +86,22 @@ class NavBar extends Component{
         );
     }
 }
+
+const Modal = ({ handleClose, show, children }) => {
+  const showHideClassName = show ? 'modal display-block' : 'modal display-none';
+
+  return (
+    <div className={showHideClassName}>
+      <section className='modal-main'>
+        {children}
+        <button
+          onClick={handleClose}
+        >
+          Close
+        </button>
+      </section>
+    </div>
+  );
+};
 
 export default NavBar;
