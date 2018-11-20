@@ -45,18 +45,18 @@ class App extends Component {
       return <Redirect to='/Home'/>
     }
   }
-  // //Revisit this code, we might want to do it this way and pass down the user state using the observer
-  // MySignUpPage = (props) => {
-  //   return (
-  //     <SignUp user={this.state.user} />
-  //   )
-  // }
+  //Revisit this code, we might want to do it this way and pass down the user state using the observer
+  MySignUpPage = (props) => {
+    return (
+      <SignUp user={this.state.user} />
+    )
+  }
 
-  // MyLoginPage = (props) => {
-  //   return (
-  //     <CardLogin user={this.state.user} />
-  //   )
-  // }
+  MyLoginPage = (props) => {
+    return (
+      <CardLogin user={this.state.user} />
+    )
+  }
 
   MyHomePage = (props) => {
     return (
