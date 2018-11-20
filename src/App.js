@@ -28,10 +28,10 @@ class App extends Component {
     this.listener = firebase.auth().onAuthStateChanged(user => {
       if (user) {
         this.setState({ user })
-        alert(user.uid + ' is logged in')
+        // alert(user.uid + ' is logged in')
       } else {
         this.setState({ user: null });
-        alert('user logged out')
+        // alert('user logged out')
       }
     });
   }

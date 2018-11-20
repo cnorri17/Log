@@ -9,17 +9,11 @@ class Modal extends Component{
       
     }
   };
-// const Modal = ({ handleClose, show, children }) => {
-//  const showHideClassName = this.props.show ? 'modal display-block' : 'modal display-none';
-
-  showHideClassName() {
-    this.props.show ? 'modal display-block' : 'modal display-none';
-  }
+  
   render(){
     return (
-      <div className={this.showHideClassName}>
+      <div className={this.props.show ? 'modal display-block':'modal display-none'}>
         <section className='modal-main'>
-          {/* {children} */}
           <p>
             butt 
           </p>
