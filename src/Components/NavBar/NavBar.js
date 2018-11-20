@@ -67,7 +67,7 @@ class NavBar extends Component{
                                 {this.props.user !== null ?
                                     
                                     <NavItem>
-                                        <Modal show={this.state.show} handleClose={this.hideModal}/>
+                                        <Modal show={this.state.show} handleClose={this.hideModal} accountType="teacher"/>
                                         <Button color="black" onClick={this.showModal} >Create New Class</Button>
                                         <Button color="black" onClick={this.signOut}>Log Out</Button>
                                     </NavItem>
@@ -85,21 +85,5 @@ class NavBar extends Component{
     }
 }
 
-// const Modal = ({ handleClose, show, children }) => {
-//   const showHideClassName = show ? 'modal display-block' : 'modal display-none';
-
-//   return (
-//     <div className={showHideClassName}>
-//       <section className='modal-main'>
-//         {children}
-//         <button
-//           onClick={handleClose}
-//         >
-//           Close
-//         </button>
-//       </section>
-//     </div>
-//   );
-// };
 
 export default NavBar;

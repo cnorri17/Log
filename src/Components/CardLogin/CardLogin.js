@@ -20,9 +20,6 @@ class CardLogin extends Component {
     }
 
     handleChange(event) {
-        // const target = event.target;
-        // const value = target.value;
-        // const name = target.name;
         this.setState({
             [event.target.name]: event.target.value
         })
@@ -56,9 +53,6 @@ class CardLogin extends Component {
     // }
 
     render() {
-        // if (this.props.user) {
-        //     return(<Redirect to='/Home'/>)
-        // }
         if (this.props.user) {
             return(<Redirect to='/Home'/>)
         }
