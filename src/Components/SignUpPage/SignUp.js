@@ -14,10 +14,13 @@ class SignUp extends Component {
             password: '',
             firstName: '',
             lastName: '',
+            accountType: '',
             // redirect: false
         }
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
+        this.handleRadio = this.handleRadio.bind(this);
+        // this.handleButton = this.handleButton.bind(this);
         // this.renderRedirect = this.renderRedirect.bind(this);
     }
 
@@ -28,6 +31,15 @@ class SignUp extends Component {
     handleChange(event) {
         this.setState({ [event.target.name]: event.target.value });
     }
+
+    handleRadio(event){
+        this.setState({ accountType: event.target.value })
+        alert('You selected' + event.target.value)
+    }
+
+    // handleButton(event){
+    //     alert('You selected' + this.state.accountType);
+    // }
 
     handleSubmit(event) {
         // alert('You have created an account with values' + this.state.email + '' + this.state.password + '' + this.state.firstName + '' + this.state.lastName);
@@ -69,10 +81,12 @@ class SignUp extends Component {
             <div  style={{display: 'flex',  justifyContent:'center', alignItems:'center', height: '50%'}}>
                 <Card className="cardlogin">
                     <CardBody >
+                        
                         <p className="h4 yellow darken-2 white-text text-center py-4" style={{paddingRight:'0%'}}> {/*<img src={mainLogo} alt="loglogo"></img>*/}SIGN UP</p>
-                        <InputPage/>
-                        <form onSubmit={this.handleSubmit}>
+                        {/* <InputPage/> */}
+                        <form onSubmit={this.handleSubmit}>  
                             <div className="grey-text">
+
                                 <Input 
                                     name="email" 
                                     label="Email" 
@@ -100,7 +114,7 @@ class SignUp extends Component {
                                     value={this.state.firstName}
                                     onChange={this.handleChange}
                                 />
-                                <div style={{paddingTop: '1px'}}>
+                                <div style={{paddingTop: '0.5px'}}>
                                     <Input 
                                         name="lastName" 
                                         label="Last Name" 
@@ -109,10 +123,17 @@ class SignUp extends Component {
                                         value={this.state.lastName}
                                         onChange={this.handleChange}
                                     />
-                                </div>    
+                                </div>
+                                <div>
+                                    <input name="selection" type="radio" value="teacher" onClick={this.handleRadio} paddingRight="1px"/>
+                                    <h5>Teacher</h5>
+                                    <input name="selection" type="radio" value="student" onClick={this.handleRadio} paddingLeft="1px"/>
+                                    <h5>Student</h5>
+                                </div>
                             </div>
                             <div className="text-center py-4 mt-3">
                                 <Button color="black" type="submit">SIGN UP</Button>
+                                {/* <Button color="black" onClick={this.handleButton}>Show Account Type</Button> */}
                             </div>
                         </form>
                     </CardBody>

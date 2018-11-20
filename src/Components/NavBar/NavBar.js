@@ -29,7 +29,7 @@ class NavBar extends Component{
 
     signOut(){
         firebase.auth().signOut();
-        <Redirect to='/login'/>
+        return(<Redirect to="/login"/>)
     }
 
     onClick(){
