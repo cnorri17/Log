@@ -9,14 +9,16 @@ import {firebase} from '../../fbConfig'
 
 
 class HomeTeacher extends Component {
-    state = {
-        userType: 'student'
+    constructor(props){
+        super(props);
+        this.state = {
+            user: {},
+            userType: 'student'
+        }
     }
 
     componentDidMount () {
-        if (firebase.auth().currentUser === null) {
-
-        }
+        this.setState({ user: this.props.user })
     }
 
     RenderHome(){

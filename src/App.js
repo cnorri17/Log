@@ -58,6 +58,12 @@ class App extends Component {
   //   )
   // }
 
+  MyHomePage = (props) => {
+    return (
+      <CardLogin user={this.state.user} />
+    )
+  }
+
   render() {
     return(
       <Router>
@@ -69,7 +75,8 @@ class App extends Component {
               <Route path="/login" component={CardLogin} exact />
               {/* <Route path="/Student" component={HomeStudent} exact />
               <Route path="/Teacher" component={HomeTeacher} exact /> */}
-              <Route path="/Home" component={Home} exact/>
+              {/* <Route path="/Home" component={Home} exact/> */}
+              <Route path="/Home" render={this.MyHomePage} exact/>
               <Route path="/SignUp" render={this.MySignUpPage} exact />
           </Switch>
         </React.Fragment>

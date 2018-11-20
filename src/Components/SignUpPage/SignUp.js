@@ -16,7 +16,6 @@ class SignUp extends Component {
             lastName: '',
             // redirect: false
         }
-
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
         // this.renderRedirect = this.renderRedirect.bind(this);
