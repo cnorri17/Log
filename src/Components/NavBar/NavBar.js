@@ -3,6 +3,7 @@ import {Button, Navbar, NavbarBrand, NavbarNav, NavbarToggler, Collapse, NavItem
 import mainLogo from '../loglogo.png';
 import './NavBar.css';
 import {Link, Redirect} from 'react-router-dom';
+import Modal from '../elements/Modal/Modal'
 
 // var firebase = require('firebase');
 import {firebase} from '../../fbConfig'
@@ -66,10 +67,7 @@ class NavBar extends Component{
                                 {this.props.user !== null ?
                                     
                                     <NavItem>
-                                        <Modal show={this.state.show} handleClose={this.hideModal}>
-                                            <p>Modal</p>
-                                            <p>Data</p>
-                                        </Modal>
+                                        <Modal show={this.state.show} handleClose={this.hideModal}/>
                                         <Button color="black" onClick={this.showModal} >Create New Class</Button>
                                         <Button color="black" onClick={this.signOut}>Log Out</Button>
                                     </NavItem>
@@ -87,21 +85,21 @@ class NavBar extends Component{
     }
 }
 
-const Modal = ({ handleClose, show, children }) => {
-  const showHideClassName = show ? 'modal display-block' : 'modal display-none';
+// const Modal = ({ handleClose, show, children }) => {
+//   const showHideClassName = show ? 'modal display-block' : 'modal display-none';
 
-  return (
-    <div className={showHideClassName}>
-      <section className='modal-main'>
-        {children}
-        <button
-          onClick={handleClose}
-        >
-          Close
-        </button>
-      </section>
-    </div>
-  );
-};
+//   return (
+//     <div className={showHideClassName}>
+//       <section className='modal-main'>
+//         {children}
+//         <button
+//           onClick={handleClose}
+//         >
+//           Close
+//         </button>
+//       </section>
+//     </div>
+//   );
+// };
 
 export default NavBar;

@@ -1,13 +1,4 @@
-Button {
-    font-family: 'Cabin Sketch', cursive;
-}
-
-#info {
-    font-family: 'Cabin Sketch', cursive;
-    border-radius: 25%;
-}
-
-/* .modal {
+.modal {
   position: fixed;
   top: 0;
   left: 0;
@@ -32,4 +23,4 @@ Button {
 
 .display-none {
   display: none;
-} */
+}

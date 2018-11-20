@@ -40,7 +40,7 @@ class Home extends Component {
             <div className="container">
                 <div className="row">
                     <div className="col-1">
-                        <SideNav/>
+                        {/* <SideNav/> */}
                     </div>
                     <div className="col-2">
                         {this.RenderHome()}
