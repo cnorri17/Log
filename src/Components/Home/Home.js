@@ -1,20 +1,31 @@
 import React, { Component } from 'react';
+import {Redirect} from 'react-router-dom';
 // import {  } from 'mdbreact';
 import './Home.css';
 import SideNav from '../elements/SideNav/SideNav';
 import HtContent from '../elements/HtContent/HtContent';
 import StContent from '../elements/StContent/StContent';
 import SideNavR from '../elements/SideNavR/SideNavR';
+import {firebase} from '../../fbConfig'
 
 
-class HomeTeacher extends Component {
-    state = {
-        userType: 'student'
+class Home extends Component {
+    constructor(props){
+        super(props);
+        this.state = {
+            user: {},
+            userType: 'student'
+        }
+    }
+
+    componentDidMount () {
+        this.setState({ user: this.props.user });
+        
     }
 
     RenderHome(){
         const homeType = this.state.userType
-        if (homeType == 'teacher'){
+        if (homeType === 'teacher'){
             return <HtContent/>
         } else{
             return <StContent/>
@@ -22,8 +33,10 @@ class HomeTeacher extends Component {
     }
 
     render(){
+        if (this.props.user === null) {
+            return (<Redirect to='/login' />)
+        }
         return(
-
             <div className="container">
                 <div className="row">
                     <div className="col-1">
@@ -37,9 +50,8 @@ class HomeTeacher extends Component {
                     </div>
                 </div>
             </div>
-            
         )
     }
 }
 
-export default HomeTeacher; 
+export default Home; 

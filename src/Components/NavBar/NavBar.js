@@ -2,7 +2,10 @@ import React, { Component} from 'react';
 import {Button, Navbar, NavbarBrand, NavbarNav, NavbarToggler, Collapse, NavItem, NavLink, Dropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'mdbreact';
 import mainLogo from '../loglogo.png';
 import './NavBar.css';
-import {Link} from 'react-router-dom';
+import {Link, Redirect} from 'react-router-dom';
+
+// var firebase = require('firebase');
+import {firebase} from '../../fbConfig'
 
 class NavBar extends Component{
     constructor(props) {
@@ -12,6 +15,12 @@ class NavBar extends Component{
             isWideEnough: false,
         };
     this.onClick = this.onClick.bind(this);
+    this.signOut = this.signOut.bind(this);
+    }
+
+    signOut(){
+        firebase.auth().signOut();
+        return(<Redirect to="/login"/>)
     }
 
     onClick(){
@@ -19,15 +28,16 @@ class NavBar extends Component{
             collapse: !this.state.collapse,
         });
     }
+
     render() {
         return (
                 <div>
                     <Navbar color="yellow darken-2" dark expand="md" scrolling>
-                        <NavbarBrand href="#">
+                        {/* <NavbarBrand> */}
                             <Link to={{ pathname: `/`}}>
                                 <strong><img src={mainLogo} alt="loglogo"></img></strong>
                             </Link>
-                        </NavbarBrand>
+                        {/* </NavbarBrand> */}
                         { !this.state.isWideEnough && <NavbarToggler onClick = { this.onClick } />}
                         <Collapse isOpen = { this.state.collapse } navbar>
                             <NavbarNav left>
@@ -44,10 +54,16 @@ class NavBar extends Component{
                             </NavbarNav>
                             
                             <NavbarNav right>
-                            <NavItem>
-                                <Link to = "/signUp"><Button color="black">Sign Up</Button></Link>
-                                <Link to = "/loggin"><Button color="black">Login</Button></Link>
-                            </NavItem>
+                                {this.props.user !== null ?
+                                    <NavItem>
+                                        <Button color="black" onClick={this.signOut}>Log Out</Button>
+                                    </NavItem>
+                                    :
+                                    <NavItem>
+                                        <Link to = "/signUp"><Button color="black">Sign Up</Button></Link>
+                                        <Link to = "/login"><Button color="black">Login</Button></Link>
+                                    </NavItem>
+                                }
                             </NavbarNav>
                         </Collapse>
                     </Navbar>
