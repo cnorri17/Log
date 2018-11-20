@@ -59,7 +59,7 @@ class CardLogin extends Component {
         // if (this.props.user) {
         //     return(<Redirect to='/Home'/>)
         // }
-        if (firebase.auth().currentUser) {
+        if (this.props.user) {
             return(<Redirect to='/Home'/>)
         }
         return (

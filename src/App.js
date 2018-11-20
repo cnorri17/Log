@@ -46,21 +46,21 @@ class App extends Component {
     }
   }
   // //Revisit this code, we might want to do it this way and pass down the user state using the observer
-  // MySignUpPage = (props) => {
-  //   return (
-  //     <SignUp user={this.state.user} />
-  //   )
-  // }
+  MySignUpPage = (props) => {
+    return (
+      <SignUp user={this.state.user} />
+    )
+  }
 
-  // MyLoginPage = (props) => {
-  //   return (
-  //     <CardLogin user={this.state.user} />
-  //   )
-  // }
+  MyLoginPage = (props) => {
+    return (
+      <CardLogin user={this.state.user} />
+    )
+  }
 
   MyHomePage = (props) => {
     return (
-      <CardLogin user={this.state.user} />
+      <Home user={this.state.user} />
     )
   }
 
@@ -72,7 +72,7 @@ class App extends Component {
           <NavBar user={this.state.user}/>
           {this.renderRedirect()}
           <Switch>
-              <Route path="/login" component={CardLogin} exact />
+              <Route path="/login" render={this.MyLoginPage} exact />
               {/* <Route path="/Student" component={HomeStudent} exact />
               <Route path="/Teacher" component={HomeTeacher} exact /> */}
               {/* <Route path="/Home" component={Home} exact/> */}
