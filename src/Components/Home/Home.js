@@ -9,7 +9,7 @@ import SideNavR from '../elements/SideNavR/SideNavR';
 import {firebase} from '../../fbConfig'
 
 
-class HomeTeacher extends Component {
+class Home extends Component {
     constructor(props){
         super(props);
         this.state = {
@@ -25,7 +25,7 @@ class HomeTeacher extends Component {
 
     RenderHome(){
         const homeType = this.state.userType
-        if (homeType == 'teacher'){
+        if (homeType === 'teacher'){
             return <HtContent/>
         } else{
             return <StContent/>
@@ -33,8 +33,8 @@ class HomeTeacher extends Component {
     }
 
     render(){
-        if (this.state.user === null) {
-            return <Redirect to='/login' />
+        if (this.props.user === null) {
+            return (<Redirect to='/login' />)
         }
         return(
             <div className="container">
@@ -54,4 +54,4 @@ class HomeTeacher extends Component {
     }
 }
 
-export default HomeTeacher; 
+export default Home; 

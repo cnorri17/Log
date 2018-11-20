@@ -124,10 +124,12 @@ class SignUp extends Component {
                                         onChange={this.handleChange}
                                     />
                                 </div>
-                                <input name="selection" type="radio" value="teacher" onClick={this.handleRadio} paddingRight="1px"/>
-                                <h5>Teacher</h5>
-                                <input name="selection" type="radio" value="student" onClick={this.handleRadio} paddingLeft="1px"/>
-                                <h5>Student</h5>
+                                <div>
+                                    <input name="selection" type="radio" value="teacher" onClick={this.handleRadio} paddingRight="1px"/>
+                                    <h5>Teacher</h5>
+                                    <input name="selection" type="radio" value="student" onClick={this.handleRadio} paddingLeft="1px"/>
+                                    <h5>Student</h5>
+                                </div>
                             </div>
                             <div className="text-center py-4 mt-3">
                                 <Button color="black" type="submit">SIGN UP</Button>
