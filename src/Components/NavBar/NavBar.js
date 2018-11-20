@@ -5,7 +5,7 @@ import './NavBar.css';
 import {Link, Redirect} from 'react-router-dom';
 
 // var firebase = require('firebase');
-import {auth} from '../../fbConfig'
+import {firebase} from '../../fbConfig'
 
 class NavBar extends Component{
     constructor(props) {
@@ -22,7 +22,7 @@ class NavBar extends Component{
 
 
     signOut(){
-        auth.signOut();
+        firebase.auth().signOut();
         <Redirect to='/login'/>
     }
 
