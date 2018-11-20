@@ -19,10 +19,6 @@ class CardLogin extends Component {
         // this.renderRedirect = this.renderRedirect.bind(this);
     }
 
-    // componentDidMount() {
-    //     this.setState({ redirect: false})
-    // }
-
     handleChange(event) {
         // const target = event.target;
         // const value = target.value;
@@ -63,7 +59,6 @@ class CardLogin extends Component {
         // if (this.props.user) {
         //     return(<Redirect to='/Home'/>)
         // }
-
         if (firebase.auth().currentUser) {
             return(<Redirect to='/Home'/>)
         }

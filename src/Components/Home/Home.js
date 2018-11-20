@@ -15,7 +15,7 @@ class HomeTeacher extends Component {
 
     componentDidMount () {
         if (firebase.auth().currentUser === null) {
-            
+
         }
     }
 
@@ -44,7 +44,6 @@ class HomeTeacher extends Component {
                     </div>
                 </div>
             </div>
-            
         )
     }
 }

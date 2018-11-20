@@ -21,15 +21,11 @@ class App extends Component {
     }
     this.MySignUpPage = this.MySignUpPage.bind(this);
     this.MyLoginPage = this.MyLoginPage.bind(this);
-    // this.authListener = this.authListener.bind(this);
     this.renderRedirect = this.renderRedirect.bind(this);
   }
 
   componentDidMount() {
     this.listener = firebase.auth().onAuthStateChanged(user => {
-      // user
-      //   ? this.setState({ user })
-      //   : this.setState({ user: null });
       if (user) {
         this.setState({ user })
         alert(user.uid + ' is logged in')
@@ -38,42 +34,29 @@ class App extends Component {
         alert('user logged out')
       }
     });
-    // this.authListener();
   }
 
   componentWillUnmount() {
     this.listener();
   }
 
-
-
-  // authListener(){
-  //   firebase.auth().onAuthStateChanged(function(user) {
-  //     if (user) {
-  //       this.setState({user})
-  //     } else{
-  //       this.setState({ user: null})
-  //     }
-  //   })
-  // }
-
   renderRedirect(){
     if(this.state.user){
       return <Redirect to='/Home'/>
     }
   }
+  // //Revisit this code, we might want to do it this way and pass down the user state using the observer
+  // MySignUpPage = (props) => {
+  //   return (
+  //     <SignUp user={this.state.user} />
+  //   )
+  // }
 
-  MySignUpPage = (props) => {
-    return (
-      <SignUp user={this.state.user} />
-    )
-  }
-
-  MyLoginPage = (props) => {
-    return (
-      <CardLogin user={this.state.user} />
-    )
-  }
+  // MyLoginPage = (props) => {
+  //   return (
+  //     <CardLogin user={this.state.user} />
+  //   )
+  // }
 
   render() {
     return(
@@ -89,15 +72,10 @@ class App extends Component {
               <Route path="/Home" component={Home} exact/>
               <Route path="/SignUp" render={this.MySignUpPage} exact />
           </Switch>
-          {/* <CardLogin /> */}
-          {/* <HomeTeacher/> */}
-          {/* <HomeStudent /> */}
         </React.Fragment>
       </Router>
     )
   }
-
 }
-
 
 export default App;

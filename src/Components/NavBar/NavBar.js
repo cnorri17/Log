@@ -18,21 +18,17 @@ class NavBar extends Component{
     this.signOut = this.signOut.bind(this);
     }
 
-
-
-
     signOut(){
         firebase.auth().signOut();
         <Redirect to='/login'/>
     }
-
-
 
     onClick(){
         this.setState({
             collapse: !this.state.collapse,
         });
     }
+
     render() {
         return (
                 <div>
@@ -64,16 +60,10 @@ class NavBar extends Component{
                                     </NavItem>
                                     :
                                     <NavItem>
-                                    <Link to = "/signUp">
-                                        <Button color="black">Sign Up</Button>
-                                    </Link>
-                                    
-                                    {/* <Button color="black"><Link to = "/signUp">Sign Up</Link></Button>
-                                    <Button color="black"><Link to = "/login">Login</Link></Button> */}
-                                    <Link to = "/login"><Button color="black">Login</Button></Link>
+                                        <Link to = "/signUp"><Button color="black">Sign Up</Button></Link>
+                                        <Link to = "/login"><Button color="black">Login</Button></Link>
                                     </NavItem>
                                 }
-                                    
                             </NavbarNav>
                         </Collapse>
                     </Navbar>
