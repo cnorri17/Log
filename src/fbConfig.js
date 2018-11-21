@@ -12,9 +12,11 @@ import firebase from 'firebase';
   firebase.initializeApp(config);
 
 const auth = firebase.auth();
+const firestore = firebase.firestore();
 
 
 export {
     auth,
-    firebase
+    firebase,
+    firestore,
 }

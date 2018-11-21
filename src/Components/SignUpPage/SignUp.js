@@ -4,7 +4,10 @@ import { Input, Button, Card, CardBody} from 'mdbreact';
 import InputPage from '../elements/RadioButton'
 import '../CardLogin/CardLogin.css'
 // var firebase = require('firebase/auth');
-import {auth} from '../../fbConfig.js'
+import {firebase} from '../../fbConfig.js'
+import { string } from 'prop-types';
+
+var db = firebase.firestore();
 
 class SignUp extends Component {
     constructor(props) {
@@ -43,12 +46,26 @@ class SignUp extends Component {
 
     handleSubmit(event) {
         // alert('You have created an account with values' + this.state.email + '' + this.state.password + '' + this.state.firstName + '' + this.state.lastName);
-        auth.createUserWithEmailAndPassword(this.state.email,this.state.password)
-            .then(user => {
+        firebase.auth().createUserWithEmailAndPassword(this.state.email,this.state.password)
+            .then(authUser => {
                 // console.log(user);
-                alert('Hey you made an account.')
+                // alert('Hey you made an account.')
                 // firebase.auth().signOut();
                 // this.render(<Redirect to='/Home'/>);
+                firebase.firestore().collection("Users").doc(authUser.user.uid)
+                    .set({
+                        email: this.state.email,
+                        firstName: this.state.firstName,
+                        lastName: this.state.lastName,
+                        accountType: this.state.accountType,
+                    })
+                    .then(result => {
+                        console.log(result);
+                        alert("You created an account!");
+                    })
+                    .catch(error => {
+                        console.log(error);
+                    })
             })
             .catch(function(error) {
 
@@ -64,6 +81,7 @@ class SignUp extends Component {
                 console.log(error);
             });
         event.preventDefault();
+
         
     }
 
