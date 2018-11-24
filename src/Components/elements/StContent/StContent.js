@@ -27,7 +27,7 @@ class StContent extends Component {
     render() {
         return (
             <div>
-                Student Content
+                <h1>User: {this.props.firstName} {this.props.lastName}</h1>
             </div>
             
         )

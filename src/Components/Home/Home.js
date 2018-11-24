@@ -14,7 +14,6 @@ class Home extends Component {
         super(props);
         this.state = {
             user: {},
-            userType: 'student'
         }
     }
 
@@ -24,11 +23,11 @@ class Home extends Component {
     }
 
     RenderHome(){
-        const homeType = this.state.userType
+        const homeType = this.props.accountType;
         if (homeType === 'teacher'){
-            return <HtContent/>
+            return <HtContent firstName={this.props.firstName} lastName={this.props.lastName}/>
         } else{
-            return <StContent/>
+            return <StContent firstName={this.props.firstName} lastName={this.props.lastName}/>
         }
     }
 

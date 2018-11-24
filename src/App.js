@@ -17,7 +17,11 @@ class App extends Component {
   constructor(props){
     super(props);
     this.state = {
-      user: null
+      user: {},
+      accountType: '',
+      firstName: '',
+      lastName: '',
+      uid: '',
     }
     this.MySignUpPage = this.MySignUpPage.bind(this);
     this.MyLoginPage = this.MyLoginPage.bind(this);
@@ -27,11 +31,16 @@ class App extends Component {
   componentDidMount() {
     this.listener = firebase.auth().onAuthStateChanged(user => {
       if (user) {
-        this.setState({ user })
-        // alert(user.uid + ' is logged in')
+        this.setState({ user });
+        this.fetchUserInfo();
       } else {
-        this.setState({ user: null });
-        // alert('user logged out')
+        this.setState({ 
+          user: null,
+          accountType: '',
+          firstName: '',
+          lastName: ''
+        });
+        // alert('user logged out');
       }
     });
   }
@@ -40,6 +49,31 @@ class App extends Component {
     this.listener();
   }
 
+
+
+  fetchUserInfo() {
+    var currentUser = firebase.auth().currentUser;
+    if (currentUser) {
+      const firestore = firebase.firestore().collection("Users").doc(currentUser.uid);
+
+      firestore.get()
+      .then(doc => {
+        const data = doc.data();
+        this.setState({
+          accountType: data.accountType,
+          firstName: data.firstName,
+          lastName: data.lastName
+        });
+        // alert("Congrats, you also retrieved user's information!")
+      });
+    }
+
+  }
+
+  showUserUID() {
+    const currentUser = this.state.user.uid;
+    return currentUser;
+  }
   renderRedirect(){
     if(this.state.user){
       return <Redirect to='/Home'/>
@@ -60,7 +94,7 @@ class App extends Component {
 
   MyHomePage = (props) => {
     return (
-      <Home user={this.state.user} />
+      <Home user={this.state.user} accountType={this.state.accountType} firstName={this.state.firstName} lastName={this.state.lastName} />
     )
   }
 
@@ -70,6 +104,7 @@ class App extends Component {
         <React.Fragment>
           {/* {console.log(this.state.user)} */}
           <NavBar user={this.state.user}/>
+          {/* {this.showUserUID()} */}
           {this.renderRedirect()}
           <Switch>
               <Route path="/login" render={this.MyLoginPage} exact />
