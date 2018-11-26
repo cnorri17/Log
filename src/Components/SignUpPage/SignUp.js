@@ -57,6 +57,8 @@ class SignUp extends Component {
                         firstName: this.state.firstName,
                         lastName: this.state.lastName,
                         accountType: this.state.accountType,
+                        classList: {},
+                        attendanceRate: {},
                     })
                     .then(result => {
                         console.log(result);
@@ -91,9 +93,9 @@ class SignUp extends Component {
     // }
 
     render() {
-        if (this.props.user){
-            return(<Redirect to='/Home'/>)
-        }
+        // if (this.props.user){
+        //     return(<Redirect to='/Home'/>)
+        // }
         return (
             <div  style={{display: 'flex',  justifyContent:'center', alignItems:'center', height: '50%'}}>
                 <Card className="cardlogin">

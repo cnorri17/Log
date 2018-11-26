@@ -113,7 +113,7 @@ class App extends Component {
       <Router>
         <React.Fragment>
           {/* {console.log(this.state.user)} */}
-          <NavBar user={this.state.user} accountType={this.state.accountType}/>
+          <NavBar user={this.state.user} accountType={this.state.accountType} firstName={this.state.firstName} lastName={this.state.lastName}/>
           {/* {this.showUserUID()} */}
           {this.renderRedirect()}
           <Switch>

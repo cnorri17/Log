@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
 import './Modal.css'
-import { Input, Button, Card, CardBody, InputNumeric, CardImage, CardTitle, CardText, Col} from 'mdbreact';
-
+import { Input, Button, Card, CardBody} from 'mdbreact';
 import '../../CardLogin/CardLogin.css'
 import {firebase} from '../../../fbConfig'
+import { string } from 'prop-types';
 
 
 class Modal extends Component{
@@ -13,14 +13,16 @@ class Modal extends Component{
     this.state={
       classCode: '',
       className: '',
-      quantity: 1
+      quantity: 1,
+      // firstName: '',
+      // lastName: '',
     }
 
     this.handleChange = this.handleChange.bind(this);
-    // this.handleSubmit = this.handleSubmit.bind(this);
     this.renderStudentForm = this.renderStudentForm.bind(this);
-
-  };
+    this.handleTeacherSubmit = this.handleTeacherSubmit.bind(this);
+    this.handleStudentSubmit = this.handleStudentSubmit.bind(this);
+  }
 
   handleChange(event) {
     this.setState({
@@ -31,49 +33,88 @@ class Modal extends Component{
   handleTeacherSubmit(event) {
     event.preventDefault();
     const currentUser = firebase.auth().currentUser;
-    const firestore = firebase.firestore().collection('classes').doc();
-    this.createSections();
-
-
+    var batch = firebase.firestore().batch();
+    var userRef = firebase.firestore().collection('Users').doc(currentUser.uid);
+    for (var i = 0; i < this.state.quantity; i++){
+      const firestore = firebase.firestore().collection('classes').doc();
+      const docID = firestore.id;
+      batch.set(firestore, {
+        className: this.state.className,
+        section: i+1,
+        teacherFirst: this.props.firstName,
+        teacherLast: this.props.lastName,
+        teacherID: currentUser.uid,
+        totalDays: 0
+      })
+      var className = this.state.className + "- section " + (i+1).toString();
+      userRef.set({
+        classList: {
+          [docID]: className,
+        }
+      }, { merge: true })
+    }
+    batch.commit()
+    .then(() => {
+      alert('batch completed')
+    })
+    .catch(error => {
+      console.log('batch error: ' + error);
+    })
   }
 
   handleStudentSubmit(event) {
-
-  }
-
-  updateUserDoc() {
-
-  }
-  
-  createSections() {
+    event.preventDefault();
     const currentUser = firebase.auth().currentUser;
-    const firestore = firebase.firestore().collection('classes').doc();
-    var batch = firebase.firestore().batch();
-    const name = this.fetchName(firebase.firestore().collection('Users').doc(currentUser.uid))
-    for (var i = 0; i < this.state.quantity; i++){
-      batch.set(firestore, {
-        className: this.state.className,
-        teacherName: name,
-        teacherID: currentUser.uid
-      })
-    }
-  }
-
-  fetchName({reference}) {
-    reference.get()
+    const userID = currentUser.uid;
+    var userRef = firebase.firestore().collection('Users').doc(currentUser.uid);
+    var classRef = firebase.firestore().collection('classes').doc(this.state.classCode);
+    var firstName = this.props.firstName;
+    var lastName = this.props.lastName;
+    var name = firstName + ' ' + lastName;
+    classRef.get()
       .then(doc => {
-        const data = doc.data();
-        var userName = data.firstName + data.lastName;
-        return userName;
+        if(doc.exists) {
+          const docID = doc.id;
+          const data = doc.data();
+          userRef.set({
+            classList: {
+              [docID]: data.className,
+            }
+          }, {merge: true})
+            .catch(error => {
+              console.log("Error at handleStudentSubmit - adding class to student-user doc: " + error);
+            });
+          classRef.set({
+            studentList: {
+              [userID]: name,
+            }
+          }, { merge: true})
+            .catch(error => {
+              console.log("Error at handleStudentSubmit - adding student to studentList in class doc: " + error);
+            });
+          classRef.collection('students').doc().set({
+            studentID: userID,
+            firstName: firstName,
+            lastName: lastName,
+            totalAttendance: 0
+          })
+            .catch(error => {
+              console.log("Error in handleStudentSubmit - creating the student subcollection for class: \n" + error)
+            });
+          alert("Added class!");
+        } else {
+          alert("This class does not exist");
+        }
+        
       })
       .catch(error => {
-        console.log(error)
+        console.log(error);
       })
   }
   
   renderTeacherForm(){
     return(
-      <form onSubmit={this.handleSubmit}>
+      <form onSubmit={this.handleTeacherSubmit}>
           <p className="h4 yellow darken-2 white-text text-center py-4" style={{paddingRight:'0%'}}>LOG IN</p>
           <div className="grey-text">
               <Input
@@ -84,7 +125,8 @@ class Modal extends Component{
                   value={this.state.className}
                   onChange={this.handleChange}
               />
-              <Input
+              <h3>Number of Sections</h3>
+              <input
                 name='quantity'
                 className="mb-2 black-text"
                 label="Number of Sections"
@@ -105,7 +147,7 @@ class Modal extends Component{
 
   renderStudentForm(){
     return(
-      <form onSubmit={this.handleSubmit}>
+      <form onSubmit={this.handleStudentSubmit}>
           <p className="h4 yellow darken-2 white-text text-center py-4" style={{paddingRight:'0%'}}>Input Class Code</p>
           <div className="grey-text">
               <Input

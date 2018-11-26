@@ -67,7 +67,11 @@ class NavBar extends Component{
                                 {this.props.user !== null ?
                                     
                                     <NavItem>
-                                        <Modal show={this.state.show} handleClose={this.hideModal} accountType={this.props.accountType}/>
+                                        <Modal show={this.state.show} handleClose={this.hideModal} 
+                                            accountType={this.props.accountType} 
+                                            firstName={this.props.firstName}
+                                            lastName={this.props.lastName}
+                                        />
                                         <Button color="black" onClick={this.showModal} >Create New Class</Button>
                                         <Button color="black" onClick={this.signOut}>Log Out</Button>
                                     </NavItem>

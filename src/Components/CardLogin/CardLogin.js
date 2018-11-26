@@ -53,9 +53,9 @@ class CardLogin extends Component {
     // }
 
     render() {
-        if (this.props.user) {
-            return(<Redirect to='/Home'/>)
-        }
+        // if (this.props.user) {
+        //     return(<Redirect to='/Home'/>)
+        // }
         return (
                 <div  style={{display: 'flex',  justifyContent:'center', alignItems:'center', height: '50%'}}>
                     {/* {this.renderRedirect()} */}
