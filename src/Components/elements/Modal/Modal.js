@@ -3,6 +3,7 @@ import './Modal.css'
 import { Input, Button, Card, CardBody, InputNumeric, CardImage, CardTitle, CardText, Col} from 'mdbreact';
 
 import '../../CardLogin/CardLogin.css'
+import {firebase} from '../../../fbConfig'
 
 
 class Modal extends Component{
@@ -16,7 +17,7 @@ class Modal extends Component{
     }
 
     this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
+    // this.handleSubmit = this.handleSubmit.bind(this);
     this.renderStudentForm = this.renderStudentForm.bind(this);
 
   };
@@ -27,11 +28,48 @@ class Modal extends Component{
     })
   }
 
-  handleSubmit() {
-    //Some code that will write to database.
+  handleTeacherSubmit(event) {
+    event.preventDefault();
+    const currentUser = firebase.auth().currentUser;
+    const firestore = firebase.firestore().collection('classes').doc();
+    this.createSections();
+
+
   }
 
+  handleStudentSubmit(event) {
+
+  }
+
+  updateUserDoc() {
+
+  }
   
+  createSections() {
+    const currentUser = firebase.auth().currentUser;
+    const firestore = firebase.firestore().collection('classes').doc();
+    var batch = firebase.firestore().batch();
+    const name = this.fetchName(firebase.firestore().collection('Users').doc(currentUser.uid))
+    for (var i = 0; i < this.state.quantity; i++){
+      batch.set(firestore, {
+        className: this.state.className,
+        teacherName: name,
+        teacherID: currentUser.uid
+      })
+    }
+  }
+
+  fetchName({reference}) {
+    reference.get()
+      .then(doc => {
+        const data = doc.data();
+        var userName = data.firstName + data.lastName;
+        return userName;
+      })
+      .catch(error => {
+        console.log(error)
+      })
+  }
   
   renderTeacherForm(){
     return(
@@ -111,7 +149,7 @@ class Modal extends Component{
     return (
       <div className={this.props.show ? 'modal display-block':'modal display-none'}>
         <section className='modal-main'>
-          <button onClick={this.props.handleClose}> Close </button>
+          <button className='closeBtn' onClick={this.props.handleClose}> Close </button>
           {this.renderFormType()}
         </section>
       </div>

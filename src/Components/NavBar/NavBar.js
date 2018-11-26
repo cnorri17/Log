@@ -6,7 +6,7 @@ import {Link, Redirect} from 'react-router-dom';
 import Modal from '../elements/Modal/Modal'
 
 // var firebase = require('firebase');
-import {firebase} from '../../fbConfig'
+import {auth} from '../../fbConfig'
 
 class NavBar extends Component{
     constructor(props) {
@@ -29,7 +29,7 @@ class NavBar extends Component{
     };
 
     signOut(){
-        firebase.auth().signOut();
+        auth.signOut();
         return(<Redirect to="/login"/>)
     }
 
@@ -67,7 +67,7 @@ class NavBar extends Component{
                                 {this.props.user !== null ?
                                     
                                     <NavItem>
-                                        <Modal show={this.state.show} handleClose={this.hideModal} accountType="teacher"/>
+                                        <Modal show={this.state.show} handleClose={this.hideModal} accountType={this.props.accountType}/>
                                         <Button color="black" onClick={this.showModal} >Create New Class</Button>
                                         <Button color="black" onClick={this.signOut}>Log Out</Button>
                                     </NavItem>

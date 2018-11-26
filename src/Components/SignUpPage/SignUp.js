@@ -51,7 +51,6 @@ class SignUp extends Component {
                 // console.log(user);
                 // alert('Hey you made an account.')
                 // firebase.auth().signOut();
-                // this.render(<Redirect to='/Home'/>);
                 firebase.firestore().collection("Users").doc(authUser.user.uid)
                     .set({
                         email: this.state.email,

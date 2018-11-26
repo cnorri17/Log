@@ -24,3 +24,7 @@
 .display-none {
   display: none;
 }
+
+.closeBtn {
+  float: right;
+}

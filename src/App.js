@@ -5,10 +5,11 @@ import logo from './logo.svg';
 import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom';
 import './App.css';
 import NavBar from './Components/NavBar/NavBar'
-// import LoginPage from './Components/LoginPage/LoginPage'
 import CardLogin from './Components/CardLogin/CardLogin'
 import Home from './Components/Home/Home'
 import SignUp from './Components/SignUpPage/SignUp'
+// import HtContent from './Components/elements/HtContent/HtContent'
+// import StContent from './Components/elements/StContent/StContent'
 import {firebase} from './fbConfig'
 
 // var firebase = require('firebase')
@@ -21,6 +22,8 @@ class App extends Component {
       accountType: '',
       firstName: '',
       lastName: '',
+      classList: {},
+      attendanceRate: {},
       uid: '',
     }
     this.MySignUpPage = this.MySignUpPage.bind(this);
@@ -62,13 +65,20 @@ class App extends Component {
         this.setState({
           accountType: data.accountType,
           firstName: data.firstName,
-          lastName: data.lastName
+          lastName: data.lastName,
+          // classList: data.classList,
+          // attendanceRate: data.attendanceRate,
         });
         // alert("Congrats, you also retrieved user's information!")
-      });
+      })
+      .catch(error => {
+        console.log(error);
+      })
     }
 
   }
+
+  
 
   showUserUID() {
     const currentUser = this.state.user.uid;
@@ -79,7 +89,7 @@ class App extends Component {
       return <Redirect to='/Home'/>
     }
   }
-  // //Revisit this code, we might want to do it this way and pass down the user state using the observer
+
   MySignUpPage = (props) => {
     return (
       <SignUp user={this.state.user} />
@@ -103,14 +113,11 @@ class App extends Component {
       <Router>
         <React.Fragment>
           {/* {console.log(this.state.user)} */}
-          <NavBar user={this.state.user}/>
+          <NavBar user={this.state.user} accountType={this.state.accountType}/>
           {/* {this.showUserUID()} */}
           {this.renderRedirect()}
           <Switch>
               <Route path="/login" render={this.MyLoginPage} exact />
-              {/* <Route path="/Student" component={HomeStudent} exact />
-              <Route path="/Teacher" component={HomeTeacher} exact /> */}
-              {/* <Route path="/Home" component={Home} exact/> */}
               <Route path="/Home" render={this.MyHomePage} exact/>
               <Route path="/SignUp" render={this.MySignUpPage} exact />
           </Switch>
