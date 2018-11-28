@@ -36,7 +36,7 @@ class Modal extends Component{
     var batch = firebase.firestore().batch();
     var userRef = firebase.firestore().collection('Users').doc(currentUser.uid);
     for (var i = 0; i < this.state.quantity; i++){
-      const firestore = firebase.firestore().collection('classes').doc();
+      const firestore = firebase.firestore().collection('Classes').doc();
       const docID = firestore.id;
       batch.set(firestore, {
         className: this.state.className,
@@ -49,7 +49,10 @@ class Modal extends Component{
       var className = this.state.className + "- section " + (i+1).toString();
       userRef.set({
         classList: {
-          [docID]: className,
+          [docID]: {
+            className: className,
+            attendanceRate: 0,
+          }
         }
       }, { merge: true })
     }
@@ -67,7 +70,7 @@ class Modal extends Component{
     const currentUser = firebase.auth().currentUser;
     const userID = currentUser.uid;
     var userRef = firebase.firestore().collection('Users').doc(currentUser.uid);
-    var classRef = firebase.firestore().collection('classes').doc(this.state.classCode);
+    var classRef = firebase.firestore().collection('Classes').doc(this.state.classCode);
     var firstName = this.props.firstName;
     var lastName = this.props.lastName;
     var name = firstName + ' ' + lastName;
@@ -78,7 +81,10 @@ class Modal extends Component{
           const data = doc.data();
           userRef.set({
             classList: {
-              [docID]: data.className,
+              [docID]: {
+                className: data.className,
+                attendanceRate: 0,
+              }
             }
           }, {merge: true})
             .catch(error => {

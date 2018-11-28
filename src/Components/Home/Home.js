@@ -31,6 +31,13 @@ class Home extends Component {
         }
     }
 
+    // fetchClasses() {
+    //     const currentUserID = firebase.auth().currentUser.uid;
+    //     const firestore = firebase.firestore().collection('Users').doc(currentUserID);
+    //     firestore.get()
+    //         .
+    // }
+
     render(){
         if (this.props.user === null) {
             return (<Redirect to='/login' />)
