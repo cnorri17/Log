@@ -46,18 +46,25 @@ class Modal extends Component{
         teacherID: currentUser.uid,
         totalDays: 0
       })
-      var className = this.state.className + "- section " + (i+1).toString();
-      userRef.set({
+      // var className = this.state.className + "- section " + (i+1).toString();
+      // userRef.set({
+        userRef.collection('ProfessorsClasses').doc().set({
         // classList: {
         //   [docID]: {
         //     className: className,
         //     attendanceRate: 0,
         //   }
         // }
-        classList: firebase.firestore.FieldValue.arrayUnion({
-          className: className,
-          attendanceRate: 0
-        })
+
+        // classList: firebase.firestore.FieldValue.arrayUnion({
+        //   className: className,
+        //   attendanceRate: 0
+        // })
+
+          className: this.state.className,
+          section: (i+1),
+          classID: docID,
+          attendanceRate: 0,
       }, { merge: true })
     }
     batch.commit()
@@ -84,17 +91,24 @@ class Modal extends Component{
           const docID = doc.id;
           const data = doc.data();
           const className = data.className + " -section " + data.section;
-          userRef.set({
+          // userRef.set({
+          userRef.collection("StudentsClasses").doc().set({
             // classList: {
             //   [docID]: {
             //     className: data.className,
             //     attendanceRate: 0,
             //   }
             // }
-            classList: firebase.firestore.FieldValue.arrayUnion({
-              className: className,
+
+            // classList: firebase.firestore.FieldValue.arrayUnion({
+            //   className: className,
+            //   attendanceRate: 0,
+            // })
+
+              className: data.className,
+              section: data.section,
+              classID: docID,
               attendanceRate: 0,
-            })
           }, {merge: true})
             .catch(error => {
               console.log("Error at handleStudentSubmit - adding class to student-user doc: " + error);

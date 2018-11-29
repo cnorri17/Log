@@ -34,28 +34,35 @@ class Home extends Component {
     //     }
     // }
 
-    // fetchClasses() {
-    //     const currentUser = firebase.auth().currentUser;
-    //     if (currentUser){
-    //         const firestore = firebase.firestore().collection('Users').doc(currentUser.uid);
-    //         firestore.onSnapshot(doc => {
-    //             const data = doc.data();
-    //             console.log(data.classList);
-    //             // data.classList.forEach(function(value, key) {
-    //             //     console.log(key + ' = ' + value);
-    //             // })
-    //             const classes = [];
-    //             data.classList.map( (element, key) => {
-    //                 classes.push(
-    //                     [element.className,element.attendanceRate]
-    //                 );
-    //             })
-    //             console.log("Pushing classes to list" + classes);
-    //             this.setState({classList: classes})
+    fetchClasses() {
+        const currentUser = firebase.auth().currentUser;
+        if (currentUser){
+            const firestore = firebase.firestore().collection('Users').doc(currentUser.uid);
+            // firestore.onSnapshot(doc => {
+            //     const data = doc.data();
+            //     console.log(data.classList);
+            //     // data.classList.forEach(function(value, key) {
+            //     //     console.log(key + ' = ' + value);
+            //     // })
+            //     const classes = [];
+            //     data.classList.map( (element, key) => {
+            //         classes.push(
+            //             [element.className,element.attendanceRate]
+            //         );
+            //     })
+            //     console.log("Pushing classes to list" + classes);
+            //     this.setState({classList: classes})
 
-    //         })
-    //     }
-    // }
+            // })
+
+            firestore.get()
+                .then(doc => {
+                    if (doc.exists) {
+                        
+                    }
+                })
+        }
+    }
 
 
     render(){
