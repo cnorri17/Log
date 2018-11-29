@@ -48,7 +48,7 @@ class Modal extends Component{
       })
       // var className = this.state.className + "- section " + (i+1).toString();
       // userRef.set({
-        userRef.collection('ProfessorsClasses').doc().set({
+        userRef.collection('UserClasses').doc().set({
         // classList: {
         //   [docID]: {
         //     className: className,
@@ -92,7 +92,7 @@ class Modal extends Component{
           const data = doc.data();
           const className = data.className + " -section " + data.section;
           // userRef.set({
-          userRef.collection("StudentsClasses").doc().set({
+          userRef.collection("UserClasses").doc().set({
             // classList: {
             //   [docID]: {
             //     className: data.className,

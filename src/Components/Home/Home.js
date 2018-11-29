@@ -54,13 +54,22 @@ class Home extends Component {
             //     this.setState({classList: classes})
 
             // })
-
-            firestore.get()
-                .then(doc => {
-                    if (doc.exists) {
-                        
-                    }
-                })
+            if(firestore.collection('UserClasses').exists){
+                firestore.collection('UserClasses').get()
+                    .then(function(querySnapshot) {
+                            querySnapshot.forEach(function(doc) {
+                                var data = doc.data();
+                                return(
+                                    <div>
+                                        <h1>{data.className}</h1>
+                                        <h1>{data.classID}</h1>
+                                        <h1>{data.section}</h1>
+                                        <h1>{data.attendanceRate}</h1>
+                                    </div>
+                                )
+                            })
+                    })
+            }
         }
     }
 
@@ -83,7 +92,9 @@ class Home extends Component {
                         {/* {this.state.classList} */}
                         {
                             this.props.accountType === 'teacher' ?
-                                <HtContent firstName={this.props.firstName} lastName={this.props.lastName}/>
+                                <HtContent firstName={this.props.firstName} lastName={this.props.lastName}>
+                                    {this.fetchClasses()}
+                                </HtContent>
                             :
                                 <StContent firstName={this.props.firstName} lastName={this.props.lastName}/>
                         }
