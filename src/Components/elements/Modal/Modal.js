@@ -48,12 +48,16 @@ class Modal extends Component{
       })
       var className = this.state.className + "- section " + (i+1).toString();
       userRef.set({
-        classList: {
-          [docID]: {
-            className: className,
-            attendanceRate: 0,
-          }
-        }
+        // classList: {
+        //   [docID]: {
+        //     className: className,
+        //     attendanceRate: 0,
+        //   }
+        // }
+        classList: firebase.firestore.FieldValue.arrayUnion({
+          className: className,
+          attendanceRate: 0
+        })
       }, { merge: true })
     }
     batch.commit()
@@ -79,13 +83,18 @@ class Modal extends Component{
         if(doc.exists) {
           const docID = doc.id;
           const data = doc.data();
+          const className = data.className + " -section " + data.section;
           userRef.set({
-            classList: {
-              [docID]: {
-                className: data.className,
-                attendanceRate: 0,
-              }
-            }
+            // classList: {
+            //   [docID]: {
+            //     className: data.className,
+            //     attendanceRate: 0,
+            //   }
+            // }
+            classList: firebase.firestore.FieldValue.arrayUnion({
+              className: className,
+              attendanceRate: 0,
+            })
           }, {merge: true})
             .catch(error => {
               console.log("Error at handleStudentSubmit - adding class to student-user doc: " + error);
@@ -98,15 +107,18 @@ class Modal extends Component{
             .catch(error => {
               console.log("Error at handleStudentSubmit - adding student to studentList in class doc: " + error);
             });
-          classRef.collection('students').doc().set({
-            studentID: userID,
-            firstName: firstName,
-            lastName: lastName,
-            totalAttendance: 0
-          })
-            .catch(error => {
-              console.log("Error in handleStudentSubmit - creating the student subcollection for class: \n" + error)
-            });
+          // if(classRef.collection('Students').doc(userID).exists){
+          //   alert("You are already listed in this class");
+          // } else {
+              classRef.collection('Students').doc(userID).set({
+                firstName: firstName,
+                lastName: lastName,
+                totalAttendance: 0
+              })
+                .catch(error => {
+                  console.log("Error in handleStudentSubmit - creating the student subcollection for class: \n" + error)
+                });
+            // }
           alert("Added class!");
         } else {
           alert("This class does not exist");

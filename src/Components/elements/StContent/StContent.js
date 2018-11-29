@@ -1,22 +1,18 @@
 import React, {Component} from 'react';
 import './StContent.css';
 import AttendanceRate from '../AttendanceRate/AttendanceRate'
+import {firebase} from '../../../fbConfig'
 
 class StContent extends Component {
     state = {
-        classList: ['class1-section1', 'class2-section2','class1-section2']
+        classList: [],
     }
 
-    renderClasses = () => {
-        const classElements = this.state.classList.map( (element, i) => {
-            return (
-                <div key={i}>
-                    {element}
-                    <AttendanceRate rate={this.getAttendanceRate(this.key)}/>
-                </div>
-            )
-        })
+    componentDidMount() {
+        // this.setState({classList: this.props.classList})
     }
+
+
 
     getAttendanceRate(item){
         //fetch attendance rate with 
@@ -24,10 +20,14 @@ class StContent extends Component {
         //return attendance rate variable as an int/string
     }
 
+
+
+
     render() {
         return (
             <div>
                 <h1>User: {this.props.firstName} {this.props.lastName}</h1>
+                <h1>AccountType: Student</h1>
             </div>
             
         )

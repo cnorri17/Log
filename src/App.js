@@ -41,9 +41,10 @@ class App extends Component {
           user: null,
           accountType: '',
           firstName: '',
-          lastName: ''
+          lastName: '',
+          uid: '',
         });
-        // alert('user logged out');
+        alert('user logged out');
       }
     });
   }
