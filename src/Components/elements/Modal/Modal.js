@@ -90,7 +90,7 @@ class Modal extends Component{
         if(doc.exists) {
           const docID = doc.id;
           const data = doc.data();
-          const className = data.className + " -section " + data.section;
+          // const className = data.className + " -section " + data.section;
           // userRef.set({
           userRef.collection("UserClasses").doc().set({
             // classList: {

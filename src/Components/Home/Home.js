@@ -8,6 +8,7 @@ import SideNavR from '../elements/SideNavR/SideNavR';
 import CLassList from '../elements/ClassList/ClassList';
 import {firebase} from '../../fbConfig'
 import ClassList from '../elements/ClassList/ClassList';
+import { string } from 'prop-types';
 
 
 class Home extends Component {
@@ -22,7 +23,7 @@ class Home extends Component {
 
     componentDidMount () {
         this.setState({ user: this.props.user });
-        // this.fetchClasses();
+        this.fetchClasses();
     }
 
     // RenderHome(){
@@ -54,27 +55,46 @@ class Home extends Component {
             //     this.setState({classList: classes})
 
             // })
-            if(firestore.collection('UserClasses').exists){
                 firestore.collection('UserClasses').get()
                     .then(function(querySnapshot) {
+                        if(querySnapshot.empty !== true){
                             querySnapshot.forEach(function(doc) {
                                 var data = doc.data();
-                                return(
-                                    <div>
-                                        <h1>{data.className}</h1>
-                                        <h1>{data.classID}</h1>
-                                        <h1>{data.section}</h1>
-                                        <h1>{data.attendanceRate}</h1>
-                                    </div>
-                                )
+                                var className = data.className;
+                                var classID = data.classID;
+                                var section = data.section;
+                                var attendanceRate = data.attendanceRate;
+                                this.setState({
+                                    classList: [...this.state.classList,
+                                                ...{
+                                                    className: className,
+                                                    classID: classID,
+                                                    section: section,
+                                                    attendanceRate: attendanceRate,
+                                                }]
+                                })
+                                // return(
+                                //     <div>
+                                //         <h1>{className}</h1>
+                                //         <h1>{classID}</h1>
+                                //         <h1>{section}</h1>
+                                //         <h1>{attendanceRate}</h1>
+                                //     </div>
+                                // )
+                                // console.log(data.className);
+                                // console.log(data.classID);
+                                // console.log(data.section);
+                                // console.log(data.attendanceRate);
                             })
+                        }
                     })
-            }
+            
         }
     }
 
 
     render(){
+        var {classList} = this.state;
         if (this.props.user === null) {
             return (<Redirect to='/login' />)
         }
@@ -93,7 +113,13 @@ class Home extends Component {
                         {
                             this.props.accountType === 'teacher' ?
                                 <HtContent firstName={this.props.firstName} lastName={this.props.lastName}>
-                                    {this.fetchClasses()}
+                                    {/* {classList.map(item => (
+                                        <div key={item.classID}>
+                                            <h1>Class Name: {item.className} Section: {item.section}</h1>
+                                            <h2>Class ID: {item.classID}</h2>
+                                            <h2>Attendance Rate: {item.attendanceRate}</h2>
+                                        </div>
+                                    ))} */}
                                 </HtContent>
                             :
                                 <StContent firstName={this.props.firstName} lastName={this.props.lastName}/>
