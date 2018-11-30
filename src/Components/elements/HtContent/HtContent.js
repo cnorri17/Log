@@ -17,7 +17,7 @@ class HtContent extends Component {
                 <h1>User: {this.props.firstName} {this.props.lastName}</h1>
                 <StudentList list={this.state.list}/>
                 {/* {children} */}
-                {Children}
+                {/* {Children} */}
             </div>
 
         )
