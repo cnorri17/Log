@@ -5,10 +5,10 @@ import SideNav from '../elements/SideNav/SideNav';
 import HtContent from '../elements/HtContent/HtContent';
 import StContent from '../elements/StContent/StContent';
 import SideNavR from '../elements/SideNavR/SideNavR';
-import CLassList from '../elements/ClassList/ClassList';
 import {firebase} from '../../fbConfig'
 import ClassList from '../elements/ClassList/ClassList';
 import { string } from 'prop-types';
+import ClassDisplay from './ClassDisplay'
 
 
 class Home extends Component {
@@ -22,8 +22,15 @@ class Home extends Component {
     }
 
     componentDidMount () {
-        this.setState({ user: this.props.user });
-        this.fetchClasses();
+        // this.setState({ user: this.props.user });
+        firebase.auth().onAuthStateChanged(user => {
+            if(user){
+                this.setState({ user })
+                this.fetchClasses();
+            } else {
+                this.setState({ user: null })
+            }
+        })
     }
 
     // RenderHome(){
@@ -39,57 +46,27 @@ class Home extends Component {
         const currentUser = firebase.auth().currentUser;
         if (currentUser){
             const firestore = firebase.firestore().collection('Users').doc(currentUser.uid);
-            // firestore.onSnapshot(doc => {
-            //     const data = doc.data();
-            //     console.log(data.classList);
-            //     // data.classList.forEach(function(value, key) {
-            //     //     console.log(key + ' = ' + value);
-            //     // })
-            //     const classes = [];
-            //     data.classList.map( (element, key) => {
-            //         classes.push(
-            //             [element.className,element.attendanceRate]
-            //         );
-            //     })
-            //     console.log("Pushing classes to list" + classes);
-            //     this.setState({classList: classes})
+            firestore.collection('UserClasses').get()
+                .then(snapshot => {
+                    var items = [];
+                    snapshot.forEach(doc => {
+                        
+                        // console.log(doc.data());
 
-            // })
-                firestore.collection('UserClasses').get()
-                    .then(function(querySnapshot) {
-                        var classData = [];
-                        if(querySnapshot.empty !== true){
-                            querySnapshot.forEach(function(doc) {
-                                // classData.push({
-                                //     className: doc.data().className,
-                                //     classID: doc.data().classID,
-                                //     section: doc.data().section,
-                                //     attendanceRate: doc.data().attendanceRate,
-                                // })
+                        items.push({
+                            className: doc.data().className,
+                            section: doc.data().section,
+                            classID: doc.data().classID,
+                            attendanceRate: doc.data().attendanceRate
+                        })
 
-                                // this.setState({
-                                //     classList: classData
-                                // })
-                                let items = doc.data();
-                                items = JSON.stringify(items);
-
-                                classData.push({
-                                    className: items.className,
-                                    classID: items.classID,
-                                    section: items.section,
-                                    attendanceRate: items.attendanceRate,
-                                });
-                                this.setState({classList: classData})
-                            
-                                // console.log(data.className);
-                                // console.log(data.classID);
-                                // console.log(data.section);
-                                // console.log(data.attendanceRate);
-                                console.log(doc.data());
-                            })
-                        }
+                        // data = JSON.stringify(data);
+                        // items.push(doc.data())
+                        // console.log(this.state.classList);
                     })
-            
+                    this.setState({classList: items})
+                })
+
         }
     }
 
@@ -113,42 +90,50 @@ class Home extends Component {
                         {/* {this.state.classList} */}
                         {
                             this.props.accountType === 'teacher' ?
-                                // <HtContent firstName={this.props.firstName} lastName={this.props.lastName}>
-                                //     {/* {classList.map(item => (
-                                //         <div key={item.classID}>
-                                //             <h1>Class Name: {item.className} Section: {item.section}</h1>
-                                //             <h2>Class ID: {item.classID}</h2>
-                                //             <h2>Attendance Rate: {item.attendanceRate}</h2>
-                                //         </div>
-                                //     ))} */}
-                                //     {/* {this.state.classList.map(result => {
-                                //         return (
-                                //             <p>
-                                //                 Class Name: {result.className},
-                                //                 Section: {result.section},
-                                //                 Class ID: {result.classID},
-                                //                 Attendance Rate: {result.attendanceRate}
-                                                
-                                //             </p>
-                                //         )
-                                //     })} */}
 
-                                // </HtContent>
-                                <HtContent firstName={this.props.firstName} lastName={this.props.lastName}/>
+                                <HtContent firstName={this.props.firstName} lastName={this.props.lastName}>
+                                    {this.state.classList.map( (doc, key) => {
+                                            doc = JSON.stringify(doc);
+                                            {/* console.log(doc); */}
+                                            return (
+                                                <ClassDisplay 
+                                                name={doc.className}
+                                                section={doc.section}
+                                                classID={doc.classID}
+                                                rate={doc.attendanceRate}
+                                                />
+                                            );
+
+                                        })
+                                    }
+                                </HtContent>
+                                    
                             :
                                 <StContent firstName={this.props.firstName} lastName={this.props.lastName}/>
                         }
-                            {this.state.classList.map(result => {
-                                return (
-                                    <p>
-                                        Class Name: {result.className},
-                                        Section: {result.section},
-                                        Class ID: {result.classID},
-                                        Attendance Rate: {result.attendanceRate}
-                                        
-                                    </p>
-                                )
-                            })}
+                        {/* {this.state.classList.map( (element, key) => {
+                            doc = JSON.stringify(doc);
+                            console.log(doc);
+                            return (
+                                <ClassDisplay 
+                                name={doc.className}
+                                section={doc.section}
+                                classID={doc.classID}
+                                rate={doc.attendanceRate}
+                                />
+                            );
+                            
+                            return(
+                                <div key={key}>
+                                    <h1>{element.section}</h1>
+                                </div>
+                            );
+
+                        })
+                        } */}
+                        
+                        
+
                     </div>
                     <div className="col-3">
                         <SideNavR homeValue={this.state.homeValue}/>
