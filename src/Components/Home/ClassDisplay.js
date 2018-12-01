@@ -14,7 +14,7 @@ const ClassDisplay = (props) => {
                     <h2 className='classH2'>Attendance Rate: {props.rate}</h2>
                 </div>
                 <div className='col-5'>
-                    <button onClick={props.onClick}>Log</button>
+                    <button disabled={props.logging} onClick={props.onClick}>Log</button>
                 </div>
             </div>
             
