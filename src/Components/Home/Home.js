@@ -83,33 +83,17 @@ class Home extends Component {
                         {/* <SideNav/> */}
                     </div>
                     <div className="col-2">
-                        {/* {this.RenderHome()} */}
-                        {/* {this.fetchClasses()} */}
-                        {/* <ClassList list={this.state.classList} /> */}
-                        {/* {this.displayClasses()} */}
-                        {/* {this.state.classList} */}
                         {
                             this.props.accountType === 'teacher' ?
 
                                 <HtContent firstName={this.props.firstName} lastName={this.props.lastName}>
-                                    {this.state.classList.map( (doc, key) => {
-                                            doc = JSON.stringify(doc);
-                                            {/* console.log(doc); */}
-                                            return (
-                                                <ClassDisplay 
-                                                name={doc.className}
-                                                section={doc.section}
-                                                classID={doc.classID}
-                                                rate={doc.attendanceRate}
-                                                />
-                                            );
-
-                                        })
-                                    }
+                                    {this.state.classList}
                                 </HtContent>
                                     
                             :
-                                <StContent firstName={this.props.firstName} lastName={this.props.lastName}/>
+                                <StContent firstName={this.props.firstName} lastName={this.props.lastName}>
+                                    {this.state.classList}
+                                </StContent>
                         }
                         {/* {this.state.classList.map( (element, key) => {
                             doc = JSON.stringify(doc);
@@ -132,11 +116,9 @@ class Home extends Component {
                         })
                         } */}
                         
-                        
-
                     </div>
                     <div className="col-3">
-                        <SideNavR homeValue={this.state.homeValue}/>
+                        <SideNavR homeValue={this.props.accountType}/>
                     </div>
                 </div>
             </div>
