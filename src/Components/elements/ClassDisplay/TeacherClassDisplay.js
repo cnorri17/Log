@@ -37,6 +37,15 @@ class TeacherClassDisplay extends Component {
                 classRef.onSnapshot(doc => {
                     const data = doc.data();
                     this.setState({logging: data.logging})
+                    if(this.state.logging){
+                        setTimeout(() => {
+                            this.setState({attendanceCode: data.attendanceCode})
+                        }, 1000);
+                    } else{
+                        setTimeout(() => {
+                            this.setState({attendanceCode: data.attendanceCode})
+                        }, 1000);
+                    }
                 })
                 // console.log("outside listen new log" + this.state.logging);
                 const userRef = firebase.firestore().collection("Users").doc(currentUser.uid).collection("UserClasses").where("classID", "==",this.props.classID);
@@ -47,6 +56,7 @@ class TeacherClassDisplay extends Component {
                         this.setState({attendanceRate: rounded})
                     })
                 })
+
             }
         }
     }
@@ -74,7 +84,7 @@ class TeacherClassDisplay extends Component {
                             this.setState({ attendanceCounter: this.state.attendanceCounter + doc.data().totalAttendance})
                         })
                         console.log("attendanceCounter scanned from every student: " + this.state.attendanceCounter)
-                        avgAttendance = (this.state.attendanceCounter/numOfStudents)/totalDays;
+                        avgAttendance = ((this.state.attendanceCounter/numOfStudents)/totalDays) * 100;
                         console.log("avgAttendance calculated after scanning students: " + avgAttendance)
                     })
                 
@@ -118,9 +128,10 @@ class TeacherClassDisplay extends Component {
             } else {
                 classRef.set({
                     logging: false,
+                    attendanceCode: '',
                 }, {merge: true})
                 this.calculateAttendance(currentUser.uid, this.props.classID);
-                // alert("Done taking attendance");
+                alert("Attendance Calculated!");
             }
         }
     }
@@ -135,11 +146,12 @@ class TeacherClassDisplay extends Component {
                         <h2 className='classH2'>ClassID: {this.props.classID}</h2>
                     </div>
                     <div className='col-5'>
-                        <h2 className='classH2'>Attendance Rate: {this.state.attendanceRate}</h2>
+                        <h2 className='classH2'>Attendance Rate: {this.state.attendanceRate} %</h2>
                     </div>
                     <div className='col-5'>
-                        <button onClick={this.takeAttendance}>Log</button>
-                        {this.state.logging ? <p>{this.state.attendanceCode}</p> : null}
+                        <button onClick={this.takeAttendance}>{this.state.logging ? "Stop Logging" : "Log"}</button>
+                        {/* {this.state.logging ? <p>{this.state.attendanceCode}</p> : null} */}
+                        <p>{this.state.attendanceCode}</p>
                     </div>
                 </div>
             </div>
