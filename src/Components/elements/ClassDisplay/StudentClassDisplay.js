@@ -13,6 +13,7 @@ class StudentClassDisplay extends Component {
             tempStudentAttendance: 0,
             tempTotalDays: 0,
             calculatedAttendance: 0,
+            didMount: false,
         }
         this.fetchCode = this.fetchCode.bind(this);
         this.logAttendance = this.logAttendance.bind(this);
@@ -21,11 +22,12 @@ class StudentClassDisplay extends Component {
     }
 
     componentDidMount() {
-
+        this.setState({didMount: true})
         this.logListener(true);
     }
 
     componentWillUnmount() {
+        this.setState({didMount: false})
         this.logListener(false);
     }
 

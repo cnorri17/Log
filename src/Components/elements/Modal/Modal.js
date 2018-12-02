@@ -3,7 +3,6 @@ import './Modal.css'
 import { Input, Button, Card, CardBody} from 'mdbreact';
 import '../../CardLogin/CardLogin.css'
 import {firebase} from '../../../fbConfig'
-import { string } from 'prop-types';
 
 
 class Modal extends Component{
@@ -15,8 +14,6 @@ class Modal extends Component{
       className: '',
       quantity: 1,
       numOfStudents: 0,
-      // firstName: '',
-      // lastName: '',
     }
 
     this.handleChange = this.handleChange.bind(this);
@@ -40,30 +37,18 @@ class Modal extends Component{
       const firestore = firebase.firestore().collection('Classes').doc();
       const docID = firestore.id;
       batch.set(firestore, {
+        attendanceCode: '',
         className: this.state.className,
+        logging: false,
+        numOfStudents: 0,
         section: i+1,
         teacherFirst: this.props.firstName,
         teacherLast: this.props.lastName,
         teacherID: currentUser.uid,
+        totalAttendance: 0,
         totalDays: 0,
-        numOfStudents: 0,
-        logging: false,
       })
-      // var className = this.state.className + "- section " + (i+1).toString();
-      // userRef.set({
         userRef.collection('UserClasses').doc().set({
-        // classList: {
-        //   [docID]: {
-        //     className: className,
-        //     attendanceRate: 0,
-        //   }
-        // }
-
-        // classList: firebase.firestore.FieldValue.arrayUnion({
-        //   className: className,
-        //   attendanceRate: 0
-        // })
-
           className: this.state.className,
           section: (i+1),
           classID: docID,
@@ -72,7 +57,7 @@ class Modal extends Component{
     }
     batch.commit()
     .then(() => {
-      alert('batch completed')
+      alert('Classes created!')
     })
     .catch(error => {
       console.log('batch error: ' + error);
@@ -101,8 +86,6 @@ class Modal extends Component{
                 numOfStudents: num,
               }, {merge: true})
             })
-          // const className = data.className + " -section " + data.section;
-          // userRef.set({
           userRef.collection("UserClasses").doc().set({
               className: data.className,
               section: data.section,
@@ -113,31 +96,27 @@ class Modal extends Component{
               console.log("Error at handleStudentSubmit - adding class to student-user doc: " + error);
             });
           classRef.set({
-            studentList: {
-              [userID]: name,
-            }
+            studentList: [
+              {[userID]: name}
+            ]
           }, { merge: true})
             .catch(error => {
               console.log("Error at handleStudentSubmit - adding student to studentList in class doc: " + error);
             });
-          // if(classRef.collection('Students').doc(userID).exists){
-          //   alert("You are already listed in this class");
-          // } else {
-              classRef.collection('Students').doc(userID).set({
-                firstName: firstName,
-                lastName: lastName,
-                totalAttendance: 0,
-                attendanceRate: 0,
-              })
-                .catch(error => {
-                  console.log("Error in handleStudentSubmit - creating the student subcollection for class: \n" + error)
-                });
+          classRef.collection('Students').doc(userID).set({
+            firstName: firstName,
+            lastName: lastName,
+            totalAttendance: 0,
+            attendanceRate: 0,
+          })
+            .catch(error => {
+              console.log("Error in handleStudentSubmit - creating the student subcollection for class: \n" + error)
+            });
             // }
           alert("Added class!");
         } else {
           alert("This class does not exist");
         }
-        
       })
       .catch(error => {
         console.log(error);
@@ -168,7 +147,6 @@ class Modal extends Component{
                 value={this.state.quantity}
                 onChange={this.handleChange}
               />
-
           </div>
           <div className="text-center py-4 mt-3">
               <Button color="black" type="submit">Create Class</Button>

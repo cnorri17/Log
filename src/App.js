@@ -28,7 +28,6 @@ class App extends Component {
     }
     this.MySignUpPage = this.MySignUpPage.bind(this);
     this.MyLoginPage = this.MyLoginPage.bind(this);
-    this.renderRedirect = this.renderRedirect.bind(this);
   }
 
   componentDidMount() {
@@ -44,7 +43,7 @@ class App extends Component {
           lastName: '',
           uid: '',
         });
-        alert('user logged out');
+        // alert('user logged out');
       }
     });
   }
@@ -76,7 +75,6 @@ class App extends Component {
         console.log(error);
       })
     }
-
   }
 
   
@@ -85,11 +83,7 @@ class App extends Component {
     const currentUser = this.state.user.uid;
     return currentUser;
   }
-  renderRedirect(){
-    if(this.state.user){
-      return <Redirect to='/Home'/>
-    }
-  }
+
 
   MySignUpPage = (props) => {
     return (
@@ -110,17 +104,23 @@ class App extends Component {
   }
 
   render() {
+    // if(this.state.user){
+    //   this.renderRedirect();
+    // }
     return(
       <Router>
         <React.Fragment>
           {/* {console.log(this.state.user)} */}
           <NavBar user={this.state.user} accountType={this.state.accountType} firstName={this.state.firstName} lastName={this.state.lastName}/>
           {/* {this.showUserUID()} */}
-          {this.renderRedirect()}
+          {/* {this.renderRedirect()} */}
+          {this.state.user ? <Redirect to='/Home'/> : null}
           <Switch>
               <Route path="/login" render={this.MyLoginPage} exact />
               <Route path="/Home" render={this.MyHomePage} exact/>
               <Route path="/SignUp" render={this.MySignUpPage} exact />
+              {/* {this.state.user ? <Redirect to='/Home'/> : null} */}
+              <Redirect to='/Home'/>
           </Switch>
         </React.Fragment>
       </Router>

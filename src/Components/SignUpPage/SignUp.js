@@ -18,13 +18,10 @@ class SignUp extends Component {
             firstName: '',
             lastName: '',
             accountType: '',
-            // redirect: false
         }
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
         this.handleRadio = this.handleRadio.bind(this);
-        // this.handleButton = this.handleButton.bind(this);
-        // this.renderRedirect = this.renderRedirect.bind(this);
     }
 
     // componentDidMount() {
@@ -37,12 +34,9 @@ class SignUp extends Component {
 
     handleRadio(event){
         this.setState({ accountType: event.target.value })
-        alert('You selected' + event.target.value)
+        // alert('You selected' + event.target.value)
     }
 
-    // handleButton(event){
-    //     alert('You selected' + this.state.accountType);
-    // }
 
     handleSubmit(event) {
         // alert('You have created an account with values' + this.state.email + '' + this.state.password + '' + this.state.firstName + '' + this.state.lastName);
@@ -83,23 +77,14 @@ class SignUp extends Component {
         
     }
 
-    // renderRedirect = () => {
-    //     if (this.state.redirect) {
-    //         return <Redirect to='/login' />
-    //     }
-    // }
 
     render() {
-        // if (this.props.user){
-        //     return(<Redirect to='/Home'/>)
-        // }
         return (
             <div  style={{display: 'flex',  justifyContent:'center', alignItems:'center', height: '50%'}}>
                 <Card className="cardlogin">
                     <CardBody >
                         
                         <p className="h4 yellow darken-2 white-text text-center py-4" style={{paddingRight:'0%'}}> {/*<img src={mainLogo} alt="loglogo"></img>*/}SIGN UP</p>
-                        {/* <InputPage/> */}
                         <form onSubmit={this.handleSubmit}>  
                             <div className="grey-text">
 
@@ -154,7 +139,6 @@ class SignUp extends Component {
                         </form>
                     </CardBody>
                 </Card>
-            {/* {this.renderRedirect()} */}
                 <script src="jquery/jquery.js"></script>
                 <script type="text/javascript" src='js/bootstrap.min.js'></script>
                 <link rel="stylesheet" href="css/bootstrap.css" />

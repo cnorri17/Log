@@ -26,6 +26,7 @@ class NavBar extends Component{
 
     hideModal = () => {
         this.setState({show: false});
+        window.location.reload();
     };
 
     signOut(){

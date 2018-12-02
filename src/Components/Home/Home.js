@@ -22,7 +22,7 @@ class Home extends Component {
 
     componentDidMount () {
         // this.setState({ user: this.props.user });
-        firebase.auth().onAuthStateChanged(user => {
+        this.listener = firebase.auth().onAuthStateChanged(user => {
             if(user){
                 this.setState({ user })
                 this.fetchClasses();
@@ -32,14 +32,9 @@ class Home extends Component {
         })
     }
 
-    // RenderHome(){
-    //     const homeType = this.props.accountType;
-    //     if (homeType === 'teacher'){
-    //         return <HtContent firstName={this.props.firstName} lastName={this.props.lastName}/>
-    //     } else{
-    //         return <StContent firstName={this.props.firstName} lastName={this.props.lastName} classList={this.state.classList}/>
-    //     }
-    // }
+    componentWillUnmount () {
+        this.listener();
+    }
 
     fetchClasses() {
         const currentUser = firebase.auth().currentUser;
@@ -74,7 +69,6 @@ class Home extends Component {
 
 
     render(){
-        var {classList} = this.state;
         if (this.props.user === null) {
             return (<Redirect to='/login' />)
         }
