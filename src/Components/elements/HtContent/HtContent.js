@@ -1,8 +1,7 @@
 import React, { Component, Children } from 'react';
 import './HtContent.css';
-import StudentList from '../StudentList/StudentList';
-import ClassDisplay from '../../Home/ClassDisplay';
-
+import TeacherStudentList from '../StudentList/StudentList';
+import TeacherClassDisplay from '../../elements/ClassDisplay/TeacherClassDisplay';
 
 
 class HtContent extends Component {
@@ -24,7 +23,7 @@ class HtContent extends Component {
                 {/* {children} */}
                 {this.props.children.map( (doc,key) => {
                     return (
-                        <ClassDisplay
+                        <TeacherClassDisplay
                             key={key}
                             name={doc.className}
                             section={doc.section}

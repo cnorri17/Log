@@ -44,7 +44,8 @@ class Modal extends Component{
         teacherFirst: this.props.firstName,
         teacherLast: this.props.lastName,
         teacherID: currentUser.uid,
-        totalDays: 0
+        totalDays: 0,
+        logging: false,
       })
       // var className = this.state.className + "- section " + (i+1).toString();
       // userRef.set({

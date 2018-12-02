@@ -8,7 +8,6 @@ import SideNavR from '../elements/SideNavR/SideNavR';
 import {firebase} from '../../fbConfig'
 import ClassList from '../elements/ClassList/ClassList';
 import { string } from 'prop-types';
-import ClassDisplay from './ClassDisplay'
 
 
 class Home extends Component {
@@ -46,7 +45,10 @@ class Home extends Component {
         const currentUser = firebase.auth().currentUser;
         if (currentUser){
             const firestore = firebase.firestore().collection('Users').doc(currentUser.uid);
-            firestore.collection('UserClasses').get()
+            firestore.collection('UserClasses')
+            .orderBy('className')
+            .orderBy('section', 'asc')
+            .get()
                 .then(snapshot => {
                     var items = [];
                     snapshot.forEach(doc => {
