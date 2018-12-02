@@ -12,9 +12,13 @@ import firebase from 'firebase';
   firebase.initializeApp(config);
 
 const auth = firebase.auth();
+const firestore = firebase.firestore();
+const settings = {timestampsInSnapshots: true};
+firestore.settings(settings);
 
 
 export {
     auth,
-    firebase
+    firebase,
+    firestore,
 }

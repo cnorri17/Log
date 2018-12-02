@@ -1,11 +1,8 @@
 import React, { Component } from 'react';
-import {Redirect} from 'react-router-dom';
 import { Input, Button, Card, CardBody} from 'mdbreact';
-// import mainLogo from '../loglogo.png';
 import './CardLogin.css'
 import {firebase} from '../../fbConfig.js'
 
-// var firebase = require('firebase/app');
 class CardLogin extends Component {
     constructor(props){
         super(props);
@@ -16,13 +13,9 @@ class CardLogin extends Component {
         }
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
-        // this.renderRedirect = this.renderRedirect.bind(this);
     }
 
     handleChange(event) {
-        // const target = event.target;
-        // const value = target.value;
-        // const name = target.name;
         this.setState({
             [event.target.name]: event.target.value
         })
@@ -30,11 +23,6 @@ class CardLogin extends Component {
 
     handleSubmit(event) {
         firebase.auth().signInWithEmailAndPassword(this.state.email, this.state.password)
-            // .then(result => {
-            //     console.log(result);
-            //     // alert('You have logged in!');
-            //     // this.setState({ redirect: true})
-            // })
             .catch(function(error) {
                 var errorCode = error.code;
                 var errorMessage = error.message;
@@ -49,19 +37,7 @@ class CardLogin extends Component {
         event.preventDefault();
     }
 
-    // renderRedirect = () => {
-    //     if (this.state.redirect) {
-    //         return <Redirect to='/Home' />
-    //     }
-    // }
-
     render() {
-        // if (this.props.user) {
-        //     return(<Redirect to='/Home'/>)
-        // }
-        if (this.props.user) {
-            return(<Redirect to='/Home'/>)
-        }
         return (
                 <div  style={{display: 'flex',  justifyContent:'center', alignItems:'center', height: '50%'}}>
                     {/* {this.renderRedirect()} */}
@@ -100,7 +76,6 @@ class CardLogin extends Component {
                 <script type="text/javascript" src='js/bootstrap.min.js'></script>
                 <link rel="stylesheet" href="css/bootstrap.css" />
                 </div>
-
         );
     }
 }

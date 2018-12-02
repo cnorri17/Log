@@ -1,0 +1,28 @@
+.classContainer{
+    min-width: 75%;
+    max-width: 100%;
+    min-height: 18rem;
+    border-style: solid;
+    border-color: black;
+    border-width: 10px;
+}
+
+.row-1:before,
+.row-1:after {
+    clear:both;
+    min-height: 10rem;
+}
+
+.col-4{
+    min-width: 60%;
+    max-width: 60%;
+    background-color: orange;
+}
+.col-5{
+    min-width: 20%;
+    max-width: 20%;
+    background-color: yellowgreen;
+}
+.logBtn{
+    
+}

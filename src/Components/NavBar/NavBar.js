@@ -3,9 +3,9 @@ import {Button, Navbar, NavbarBrand, NavbarNav, NavbarToggler, Collapse, NavItem
 import mainLogo from '../loglogo.png';
 import './NavBar.css';
 import {Link, Redirect} from 'react-router-dom';
+import Modal from '../elements/Modal/Modal'
 
-// var firebase = require('firebase');
-import {firebase} from '../../fbConfig'
+import {auth} from '../../fbConfig'
 
 class NavBar extends Component{
     constructor(props) {
@@ -13,13 +13,23 @@ class NavBar extends Component{
         this.state = {
             collapse: false,
             isWideEnough: false,
+            show: false,
         };
     this.onClick = this.onClick.bind(this);
     this.signOut = this.signOut.bind(this);
     }
 
+    showModal = () => {
+        this.setState({show: true});
+    };
+
+    hideModal = () => {
+        this.setState({show: false});
+        window.location.reload();
+    };
+
     signOut(){
-        firebase.auth().signOut();
+        auth.signOut();
         return(<Redirect to="/login"/>)
     }
 
@@ -55,7 +65,14 @@ class NavBar extends Component{
                             
                             <NavbarNav right>
                                 {this.props.user !== null ?
+                                    
                                     <NavItem>
+                                        <Modal show={this.state.show} handleClose={this.hideModal} 
+                                            accountType={this.props.accountType} 
+                                            firstName={this.props.firstName}
+                                            lastName={this.props.lastName}
+                                        />
+                                        <Button color="black" onClick={this.showModal} >Create New Class</Button>
                                         <Button color="black" onClick={this.signOut}>Log Out</Button>
                                     </NavItem>
                                     :
@@ -71,5 +88,6 @@ class NavBar extends Component{
         );
     }
 }
+
 
 export default NavBar;

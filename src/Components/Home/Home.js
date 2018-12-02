@@ -1,34 +1,60 @@
 import React, { Component } from 'react';
 import {Redirect} from 'react-router-dom';
-// import {  } from 'mdbreact';
 import './Home.css';
-import SideNav from '../elements/SideNav/SideNav';
 import HtContent from '../elements/HtContent/HtContent';
 import StContent from '../elements/StContent/StContent';
 import SideNavR from '../elements/SideNavR/SideNavR';
 import {firebase} from '../../fbConfig'
-
+import ClassList from '../elements/ClassList/ClassList';
 
 class Home extends Component {
     constructor(props){
         super(props);
         this.state = {
             user: {},
-            userType: 'student'
+            classList: [],
         }
+        // this.fetchClasses = this.fetchClasses.bind(this);
     }
 
     componentDidMount () {
-        this.setState({ user: this.props.user });
-        
+        // this.setState({ user: this.props.user });
+        this.listener = firebase.auth().onAuthStateChanged(user => {
+            if(user){
+                this.setState({ user })
+                this.fetchClasses();
+            } else {
+                this.setState({ user: null })
+            }
+        })
     }
 
-    RenderHome(){
-        const homeType = this.state.userType
-        if (homeType === 'teacher'){
-            return <HtContent/>
-        } else{
-            return <StContent/>
+    componentWillUnmount () {
+        this.listener();
+    }
+
+    fetchClasses() {
+        const currentUser = firebase.auth().currentUser;
+        if (currentUser){
+            const firestore = firebase.firestore().collection('Users').doc(currentUser.uid);
+            firestore.collection('UserClasses')
+            .orderBy('className')
+            .orderBy('section', 'asc')
+            .get()
+                .then(snapshot => {
+                    var items = [];
+                    snapshot.forEach(doc => {
+                        // console.log(doc.data());
+                        items.push({
+                            className: doc.data().className,
+                            section: doc.data().section,
+                            classID: doc.data().classID,
+                            attendanceRate: doc.data().attendanceRate
+                        })
+                    })
+                    this.setState({classList: items})
+                })
+
         }
     }
 
@@ -40,13 +66,24 @@ class Home extends Component {
             <div className="container">
                 <div className="row">
                     <div className="col-1">
-                        <SideNav/>
+                        {/* <SideNav/> */}
                     </div>
                     <div className="col-2">
-                        {this.RenderHome()}
+                        {
+                            this.props.accountType === 'teacher' ?
+
+                                <HtContent firstName={this.props.firstName} lastName={this.props.lastName}>
+                                    {this.state.classList}
+                                </HtContent>
+                                    
+                            :
+                                <StContent firstName={this.props.firstName} lastName={this.props.lastName}>
+                                    {this.state.classList}
+                                </StContent>
+                        }          
                     </div>
                     <div className="col-3">
-                        <SideNavR homeValue={this.state.homeValue}/>
+                        {/* <SideNavR homeValue={this.props.accountType}/> */}
                     </div>
                 </div>
             </div>

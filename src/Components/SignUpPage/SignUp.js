@@ -1,10 +1,7 @@
 import React, { Component } from 'react';
-import {Redirect} from 'react-router-dom';
 import { Input, Button, Card, CardBody} from 'mdbreact';
-import InputPage from '../elements/RadioButton'
 import '../CardLogin/CardLogin.css'
-// var firebase = require('firebase/auth');
-import {auth} from '../../fbConfig.js'
+import {firebase} from '../../fbConfig.js'
 
 class SignUp extends Component {
     constructor(props) {
@@ -15,18 +12,11 @@ class SignUp extends Component {
             firstName: '',
             lastName: '',
             accountType: '',
-            // redirect: false
         }
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
         this.handleRadio = this.handleRadio.bind(this);
-        // this.handleButton = this.handleButton.bind(this);
-        // this.renderRedirect = this.renderRedirect.bind(this);
     }
-
-    // componentDidMount() {
-    //     this.setState({ redirect: false})
-    // }
 
     handleChange(event) {
         this.setState({ [event.target.name]: event.target.value });
@@ -34,56 +24,50 @@ class SignUp extends Component {
 
     handleRadio(event){
         this.setState({ accountType: event.target.value })
-        alert('You selected' + event.target.value)
+        // alert('You selected' + event.target.value)
     }
-
-    // handleButton(event){
-    //     alert('You selected' + this.state.accountType);
-    // }
 
     handleSubmit(event) {
         // alert('You have created an account with values' + this.state.email + '' + this.state.password + '' + this.state.firstName + '' + this.state.lastName);
-        auth.createUserWithEmailAndPassword(this.state.email,this.state.password)
-            .then(user => {
+        firebase.auth().createUserWithEmailAndPassword(this.state.email,this.state.password)
+            .then(authUser => {
                 // console.log(user);
-                alert('Hey you made an account.')
-                // firebase.auth().signOut();
-                // this.render(<Redirect to='/Home'/>);
+                // alert('Hey you made an account.')
+                firebase.firestore().collection("Users").doc(authUser.user.uid)
+                    .set({
+                        email: this.state.email,
+                        firstName: this.state.firstName,
+                        lastName: this.state.lastName,
+                        accountType: this.state.accountType,
+                    })
+                    .then(result => {
+                        console.log(result);
+                        alert("You created an account!");
+                    })
+                    .catch(error => {
+                        console.log(error);
+                    })
             })
             .catch(function(error) {
-
                 var errorCode=error.code;
                 var errorMessage= error.message;
-
                 if (errorCode === 'auth/weak-password'){
                     alert('The password is too weak.');
                 } else {
                     alert('ErrorCode: ' + errorCode + '\nErrorMessage: ' + errorMessage);
                 }
-                
                 console.log(error);
             });
         event.preventDefault();
-        
     }
 
-    // renderRedirect = () => {
-    //     if (this.state.redirect) {
-    //         return <Redirect to='/login' />
-    //     }
-    // }
-
     render() {
-        if (this.props.user){
-            return(<Redirect to='/Home'/>)
-        }
         return (
             <div  style={{display: 'flex',  justifyContent:'center', alignItems:'center', height: '50%'}}>
                 <Card className="cardlogin">
                     <CardBody >
                         
                         <p className="h4 yellow darken-2 white-text text-center py-4" style={{paddingRight:'0%'}}> {/*<img src={mainLogo} alt="loglogo"></img>*/}SIGN UP</p>
-                        {/* <InputPage/> */}
                         <form onSubmit={this.handleSubmit}>  
                             <div className="grey-text">
 
@@ -138,7 +122,6 @@ class SignUp extends Component {
                         </form>
                     </CardBody>
                 </Card>
-            {/* {this.renderRedirect()} */}
                 <script src="jquery/jquery.js"></script>
                 <script type="text/javascript" src='js/bootstrap.min.js'></script>
                 <link rel="stylesheet" href="css/bootstrap.css" />
