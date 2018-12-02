@@ -55,11 +55,9 @@ class StudentClassDisplay extends Component {
                         })
                         
                     })
-
                     // console.log("attendanceRate: " + this.state.attendanceRate);
             }
         }
-
     }
 
     fetchCode() {
@@ -99,27 +97,16 @@ class StudentClassDisplay extends Component {
         classRef.get()
             .then(doc => {
                 this.setState({tempTotalDays: doc.data().totalDays})
-                // console.log("tempTotalDays: " + this.state.tempTotalDays)
-                // doc.ref.collection("Students").doc(userID).get()
-                //     .then(student => {
-                //         this.setState({tempStudentAttendance: student.data().totalAttendance});
-                //         console.log("totalAttendance: " + student.data().totalAttendance);
-                //         console.log("tempStudentAtt: " + this.state.tempStudentAttendance)
-                //     })
                 var calc = (this.state.tempStudentAttendance/this.state.tempTotalDays) * 100;
                 this.setState({calculatedAttendance: calc})
 
             })
         
-        // var calc = (this.state.tempStudentAttendance/this.state.tempTotalDays) * 100;
+
 
         userRef.get()
             .then(querySnapShot => {
                 querySnapShot.forEach(doc => {
-                    // console.log("tempStudentAttendance in calc: " + this.state.tempStudentAttendance);
-                    // console.log("tempTotalDays in calc: " + this.state.tempTotalDays);
-                    // var calc = (this.state.tempStudentAttendance/this.state.tempTotalDays) * 100;
-                    // console.log("calc: " + calc)
                     doc.ref.set({
                         attendanceRate: this.state.calculatedAttendance,
                     }, {merge: true})
@@ -132,12 +119,10 @@ class StudentClassDisplay extends Component {
             }, {merge: true})
         }, 1000);
     }
-    
 
     logAttendance(event) {
         const currentUser = firebase.auth().currentUser;
         if (currentUser) {
-            // this.fetchCode();
             if(this.state.inputCode !== this.state.attendanceCode)
             {
                 alert("That is not the correct daily code.");
@@ -178,9 +163,6 @@ class StudentClassDisplay extends Component {
                         />
                     </div>
                 </div>
-                
-                
-                
             </div>
         )
     }

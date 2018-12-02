@@ -5,7 +5,6 @@ import './NavBar.css';
 import {Link, Redirect} from 'react-router-dom';
 import Modal from '../elements/Modal/Modal'
 
-// var firebase = require('firebase');
 import {auth} from '../../fbConfig'
 
 class NavBar extends Component{

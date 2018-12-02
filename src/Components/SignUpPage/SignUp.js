@@ -1,13 +1,7 @@
 import React, { Component } from 'react';
-import {Redirect} from 'react-router-dom';
 import { Input, Button, Card, CardBody} from 'mdbreact';
-import InputPage from '../elements/RadioButton'
 import '../CardLogin/CardLogin.css'
-// var firebase = require('firebase/auth');
 import {firebase} from '../../fbConfig.js'
-import { string } from 'prop-types';
-
-var db = firebase.firestore();
 
 class SignUp extends Component {
     constructor(props) {
@@ -24,10 +18,6 @@ class SignUp extends Component {
         this.handleRadio = this.handleRadio.bind(this);
     }
 
-    // componentDidMount() {
-    //     this.setState({ redirect: false})
-    // }
-
     handleChange(event) {
         this.setState({ [event.target.name]: event.target.value });
     }
@@ -36,7 +26,6 @@ class SignUp extends Component {
         this.setState({ accountType: event.target.value })
         // alert('You selected' + event.target.value)
     }
-
 
     handleSubmit(event) {
         // alert('You have created an account with values' + this.state.email + '' + this.state.password + '' + this.state.firstName + '' + this.state.lastName);
@@ -60,23 +49,17 @@ class SignUp extends Component {
                     })
             })
             .catch(function(error) {
-
                 var errorCode=error.code;
                 var errorMessage= error.message;
-
                 if (errorCode === 'auth/weak-password'){
                     alert('The password is too weak.');
                 } else {
                     alert('ErrorCode: ' + errorCode + '\nErrorMessage: ' + errorMessage);
                 }
-                
                 console.log(error);
             });
         event.preventDefault();
-
-        
     }
-
 
     render() {
         return (

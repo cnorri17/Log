@@ -3,18 +3,14 @@ import './SideNavR.css'
 import 'react-dropdown/style.css'
 import AttendanceRate from '../AttendanceRate/AttendanceRate';
 
-
-
 class SideNavR extends Component{
     constructor(props) {
         super(props);
-        
         this.state = {
           showMenu: false,
           rate: 75,
           homeType: this.props.homeValue
         }
-        
       }
 
     render() {

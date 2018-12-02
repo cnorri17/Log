@@ -1,9 +1,6 @@
 import React, { Component} from 'react';
 import './SideNav.css'
 import 'react-dropdown/style.css'
-import ClassName from './ClassName'
-
-
 
 class SideNavBar extends Component{
     constructor(props) {
@@ -68,6 +65,5 @@ class SideNavBar extends Component{
         )
     }
 }
-
 
 export default SideNavBar;

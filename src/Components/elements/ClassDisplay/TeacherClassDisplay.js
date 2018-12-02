@@ -20,10 +20,6 @@ class TeacherClassDisplay extends Component {
 
     componentDidMount() {
         this.setState({ didMount: true })
-        // if(this.state.didMount) {
-        //     this.logListener();
-        // }
-        // this.logListener();
         this.logListener(true);
     }
 
@@ -43,7 +39,6 @@ class TeacherClassDisplay extends Component {
                     this.setState({logging: data.logging})
                 })
                 // console.log("outside listen new log" + this.state.logging);
-
                 const userRef = firebase.firestore().collection("Users").doc(currentUser.uid).collection("UserClasses").where("classID", "==",this.props.classID);
                 userRef.onSnapshot(querySnapShot => {
                     querySnapShot.forEach(doc => {
@@ -57,11 +52,11 @@ class TeacherClassDisplay extends Component {
             }
         }
     }
+
     generateCode() {
         let code = Math.random().toString(36).substr(2,5);
         this.setState({attendanceCode: code})
         return code;
-        
     }
 
     calculateAttendance = (userID, classID) => {
@@ -131,9 +126,7 @@ class TeacherClassDisplay extends Component {
                 // alert("Done taking attendance");
             }
         }
-
     }
-
 
     render() {
         return(
@@ -152,9 +145,6 @@ class TeacherClassDisplay extends Component {
                         {this.state.logging ? <p>{this.state.attendanceCode}</p> : null}
                     </div>
                 </div>
-                
-                
-                
             </div>
         )
     }
