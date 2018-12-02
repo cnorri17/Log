@@ -46,9 +46,7 @@ class TeacherClassDisplay extends Component {
                         var rounded = Number(data.attendanceRate.toFixed(4));
                         this.setState({attendanceRate: rounded})
                     })
-                    
                 })
-
             }
         }
     }
@@ -117,7 +115,6 @@ class TeacherClassDisplay extends Component {
                             alert("You are now taking attendance!");
                         })
                     })
-
             } else {
                 classRef.set({
                     logging: false,

@@ -99,11 +99,7 @@ class StudentClassDisplay extends Component {
                 this.setState({tempTotalDays: doc.data().totalDays})
                 var calc = (this.state.tempStudentAttendance/this.state.tempTotalDays) * 100;
                 this.setState({calculatedAttendance: calc})
-
             })
-        
-
-
         userRef.get()
             .then(querySnapShot => {
                 querySnapShot.forEach(doc => {
@@ -112,7 +108,6 @@ class StudentClassDisplay extends Component {
                     }, {merge: true})
                 })
             })
-        
         setTimeout(() => {
             classRef.collection('Students').doc(userID).set({
                 attendanceRate: this.state.calculatedAttendance,
@@ -130,9 +125,9 @@ class StudentClassDisplay extends Component {
                 this.updateClassAttendance(currentUser.uid, this.props.classID)
                 setTimeout(() => {
                     this.updateStudentAttendance(currentUser.uid, this.props.classID);
+                    this.setState({logging: false})
+                    alert('Your attendance was taken!')
                 }, 1000);
-
-                
             }
         }
     }
