@@ -12,6 +12,7 @@ class StudentClassDisplay extends Component {
             attendanceRate: 0,
             tempStudentAttendance: 0,
             tempTotalDays: 0,
+            calculatedAttendance: 0,
         }
         this.fetchCode = this.fetchCode.bind(this);
         this.logAttendance = this.logAttendance.bind(this);
@@ -30,7 +31,7 @@ class StudentClassDisplay extends Component {
 
     logListener = (didMount) => {
         if(didMount){
-            console.log("ClassID: " + this.props.classID)
+            // console.log("ClassID: " + this.props.classID)
             const currentUser = firebase.auth().currentUser;
             
             if (currentUser){
@@ -42,7 +43,7 @@ class StudentClassDisplay extends Component {
                             this.fetchCode();
                         }
                     })
-                    console.log("outside listen new log " + this.state.logging);
+                    // console.log("outside listen new log " + this.state.logging);
 
                     const userRef = firebase.firestore().collection("Users").doc(currentUser.uid).collection("UserClasses").where("classID", "==",this.props.classID);
                     userRef.onSnapshot(querySnapShot => {
@@ -56,27 +57,14 @@ class StudentClassDisplay extends Component {
                     // console.log("attendanceRate: " + this.state.attendanceRate);
             }
         }
-        // console.log("ClassID: " + this.props.classID)
-        // const currentUser = firebase.auth().currentUser;
-        
-        // if (currentUser){
-        //     if(this.state.didMount) {
-        //         const classRef = firebase.firestore().collection("Classes").doc(this.props.classID);
-        //         classRef.onSnapshot(doc => {
-        //             const data = doc.data();
-        //             this.setState({logging: data.logging})
-        //         })
-        //         console.log("outside listen new log" + this.state.logging);
-        //     }
 
-        // }
     }
 
     fetchCode() {
         const classRef = firebase.firestore().collection("Classes").doc(this.props.classID);
         classRef.get()
             .then(result => {
-                console.log(result.data().attendanceCode)
+                // console.log(result.data().attendanceCode)
                 this.setState({attendanceCode: result.data().attendanceCode})
             })
             .catch(error => {
@@ -87,32 +75,12 @@ class StudentClassDisplay extends Component {
     updateClassAttendance = (userID, classID) => {
         const classRef = firebase.firestore().doc(`Classes/${classID}/Students/${userID}`);
 
-        // firebase.firestore().runTransaction(transaction => {
-        //     return transaction.get(classRef).then(doc => {
-        //         if (doc.exists) {
-        //             var newAttendance = doc.data().totalAttendance + 1;
-        //             this.setState({tempStudentAttendance: newAttendance})
-        //             console.log("newAttendance in updateClassAttendance: " + newAttendance);
-        //             console.log("tempStudentAttendance: " + this.state.tempStudentAttendance);
-        //             transaction.update(classRef, { totalAttendance: newAttendance})
-        //         } else {
-        //             alert("Error, cannot find class. Something broke.")
-        //         }
-        //     })
-        // })
-        // .then(() => {
-        //     console.log("Transaction Success");
-        // })
-        // .catch(error => {
-        //     console.log('Transaction failure: ', error);
-        // })
-
         classRef.get()
             .then(doc => {
                 var newAttendance = doc.data().totalAttendance + 1;
                 this.setState({tempStudentAttendance: newAttendance});
-                console.log("newAttendance in updateClassAttendance: " + newAttendance);
-                console.log("tempStudentAttendance: " + this.state.tempStudentAttendance);
+                // console.log("newAttendance in updateClassAttendance: " + newAttendance);
+                // console.log("tempStudentAttendance: " + this.state.tempStudentAttendance);
                 doc.ref.set({
                     totalAttendance: newAttendance
                 }, {merge: true})
@@ -129,28 +97,38 @@ class StudentClassDisplay extends Component {
         classRef.get()
             .then(doc => {
                 this.setState({tempTotalDays: doc.data().totalDays})
-                console.log("tempTotalDays: " + this.state.tempTotalDays)
+                // console.log("tempTotalDays: " + this.state.tempTotalDays)
                 // doc.ref.collection("Students").doc(userID).get()
                 //     .then(student => {
                 //         this.setState({tempStudentAttendance: student.data().totalAttendance});
                 //         console.log("totalAttendance: " + student.data().totalAttendance);
                 //         console.log("tempStudentAtt: " + this.state.tempStudentAttendance)
                 //     })
+                var calc = (this.state.tempStudentAttendance/this.state.tempTotalDays) * 100;
+                this.setState({calculatedAttendance: calc})
+
             })
+        
+        // var calc = (this.state.tempStudentAttendance/this.state.tempTotalDays) * 100;
 
         userRef.get()
             .then(querySnapShot => {
                 querySnapShot.forEach(doc => {
-                    console.log("tempStudentAttendance in calc: " + this.state.tempStudentAttendance);
-                    console.log("tempTotalDays in calc: " + this.state.tempTotalDays);
-                    var calc = (this.state.tempStudentAttendance/this.state.tempTotalDays) * 100;
-                    console.log("calc: " + calc)
+                    // console.log("tempStudentAttendance in calc: " + this.state.tempStudentAttendance);
+                    // console.log("tempTotalDays in calc: " + this.state.tempTotalDays);
+                    // var calc = (this.state.tempStudentAttendance/this.state.tempTotalDays) * 100;
+                    // console.log("calc: " + calc)
                     doc.ref.set({
-                        attendanceRate: calc,
+                        attendanceRate: this.state.calculatedAttendance,
                     }, {merge: true})
                 })
             })
-
+        
+        setTimeout(() => {
+            classRef.collection('Students').doc(userID).set({
+                attendanceRate: this.state.calculatedAttendance,
+            }, {merge: true})
+        }, 1000);
     }
     
 

@@ -14,6 +14,7 @@ class Modal extends Component{
       classCode: '',
       className: '',
       quantity: 1,
+      numOfStudents: 0,
       // firstName: '',
       // lastName: '',
     }
@@ -45,6 +46,7 @@ class Modal extends Component{
         teacherLast: this.props.lastName,
         teacherID: currentUser.uid,
         totalDays: 0,
+        numOfStudents: 0,
         logging: false,
       })
       // var className = this.state.className + "- section " + (i+1).toString();
@@ -91,21 +93,17 @@ class Modal extends Component{
         if(doc.exists) {
           const docID = doc.id;
           const data = doc.data();
+
+          classRef.get()
+            .then(doc => {
+              var num = doc.data().numOfStudents + 1;
+              doc.ref.set({
+                numOfStudents: num,
+              }, {merge: true})
+            })
           // const className = data.className + " -section " + data.section;
           // userRef.set({
           userRef.collection("UserClasses").doc().set({
-            // classList: {
-            //   [docID]: {
-            //     className: data.className,
-            //     attendanceRate: 0,
-            //   }
-            // }
-
-            // classList: firebase.firestore.FieldValue.arrayUnion({
-            //   className: className,
-            //   attendanceRate: 0,
-            // })
-
               className: data.className,
               section: data.section,
               classID: docID,
@@ -128,7 +126,8 @@ class Modal extends Component{
               classRef.collection('Students').doc(userID).set({
                 firstName: firstName,
                 lastName: lastName,
-                totalAttendance: 0
+                totalAttendance: 0,
+                attendanceRate: 0,
               })
                 .catch(error => {
                   console.log("Error in handleStudentSubmit - creating the student subcollection for class: \n" + error)

@@ -50,15 +50,12 @@ class SignUp extends Component {
             .then(authUser => {
                 // console.log(user);
                 // alert('Hey you made an account.')
-                // firebase.auth().signOut();
                 firebase.firestore().collection("Users").doc(authUser.user.uid)
                     .set({
                         email: this.state.email,
                         firstName: this.state.firstName,
                         lastName: this.state.lastName,
                         accountType: this.state.accountType,
-                        classList: {},
-                        attendanceRate: {},
                     })
                     .then(result => {
                         console.log(result);

@@ -16,12 +16,12 @@
 .col-4{
     min-width: 60%;
     max-width: 60%;
-    background-color: pink;
+    background-color: orange;
 }
 .col-5{
     min-width: 20%;
     max-width: 20%;
-    background-color: yellow;
+    background-color: yellowgreen;
 }
 .logBtn{
     
