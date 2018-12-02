@@ -28,9 +28,9 @@ class CardLogin extends Component {
                 var errorMessage = error.message;
 
                 if (errorCode === 'auth/wrong-password') {
-                    alert('Wrong password.');
+                    alert('ERROR: Incorrect Password!');
                 } else {
-                    alert('ErrorCode: ' + errorCode + '\nErrorMessage: ' + errorMessage);
+                    alert('ERROR: ' + errorCode + '\nErrorMessage: ' + errorMessage);
                 }
                 console.log(error);
             });
@@ -48,7 +48,7 @@ class CardLogin extends Component {
                                 <div className="grey-text">
                                     <Input
                                         name='email' 
-                                        label="email" 
+                                        label="Email Address" 
                                         icon="envelope-o" 
                                         group type="email" 
                                         validate error="wrong" 
@@ -58,7 +58,7 @@ class CardLogin extends Component {
                                     />
                                     <Input
                                         name='password' 
-                                        label="password" 
+                                        label="Password" 
                                         icon="lock" 
                                         group type="password" 
                                         validate
@@ -67,7 +67,7 @@ class CardLogin extends Component {
                                     />
                                 </div>
                                 <div className="text-center py-4 mt-3">
-                                    <Button color="black" type="submit">LOG IN</Button>
+                                    <Button color="grey" type="submit">LOG IN</Button>
                                 </div>
                             </form>
                         </CardBody>

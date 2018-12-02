@@ -26,5 +26,15 @@
 }
 
 .closeBtn {
+  background-color:grey;
+  color: white;
   float: right;
+  margin: 10px;
+  padding: 10px;
+}
+
+
+.black-text{
+  color:grey !important;
+
 }

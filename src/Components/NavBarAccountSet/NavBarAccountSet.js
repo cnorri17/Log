@@ -45,7 +45,7 @@ class NavBarAccountSet extends Component{
 
                             <NavbarNav right>
                                 <NavItem>
-                                    <Button href='#' color='blue'><i class="fa fa-gear" aria-hidden="true"></i> Setings</Button>
+                                    <Button href='#' color='blue'><i class="fa fa-gear" aria-hidden="true"></i>Settings</Button>
                                 </NavItem>
                             </NavbarNav>
                         </Collapse>

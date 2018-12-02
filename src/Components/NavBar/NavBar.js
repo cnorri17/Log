@@ -72,13 +72,13 @@ class NavBar extends Component{
                                             firstName={this.props.firstName}
                                             lastName={this.props.lastName}
                                         />
-                                        <Button color="black" onClick={this.showModal} >Create New Class</Button>
-                                        <Button color="black" onClick={this.signOut}>Log Out</Button>
+                                        <Button color="grey" onClick={this.showModal}>New Class</Button>
+                                        <Button color="grey" onClick={this.signOut}>Log Out</Button>
                                     </NavItem>
                                     :
                                     <NavItem>
-                                        <Link to = "/signUp"><Button color="black">Sign Up</Button></Link>
-                                        <Link to = "/login"><Button color="black">Login</Button></Link>
+                                        <Link to = "/signUp"><Button color="grey">Sign Up</Button></Link>
+                                        <Link to = "/login"><Button color="grey">Login</Button></Link>
                                     </NavItem>
                                 }
                             </NavbarNav>

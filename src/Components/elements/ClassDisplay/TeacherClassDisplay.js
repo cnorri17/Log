@@ -122,7 +122,7 @@ class TeacherClassDisplay extends Component {
                             totalDays: newTotalDays,
                         }, {merge: true})
                         .then(() => {
-                            alert("You are now taking attendance!");
+                            alert("You Are Now Logging Attendance!");
                         })
                     })
             } else {
@@ -141,16 +141,19 @@ class TeacherClassDisplay extends Component {
             <div className="classContainer">
                 <div className="row-1">
                     <div className='col-4'>
-                        <h1 className='classH1'>ClassName: {this.props.name}</h1>
-                        <h2 className='classH2'>Section: {this.props.section}</h2>
-                        <h2 className='classH2'>ClassID: {this.props.classID}</h2>
+                        <h3 className='classH1'>ClassName: {this.props.name}</h3>
+                        <h4 className='classH2'>Section: {this.props.section}</h4>
+                        <h4 className='classH2'>ClassID: {this.props.classID}</h4>
                     </div>
                     <div className='col-5'>
-                        <h2 className='classH2'>Attendance Rate: {this.state.attendanceRate} %</h2>
+                        <h3 className='classH2'>Attendance Rate: {this.state.attendanceRate} %</h3>
                     </div>
+                    
                     <div className='col-5'>
+                        
                         <button onClick={this.takeAttendance}>{this.state.logging ? "Stop Logging" : "Log"}</button>
                         {/* {this.state.logging ? <p>{this.state.attendanceCode}</p> : null} */}
+                        <label for="button">Logging Code:</label>
                         <p>{this.state.attendanceCode}</p>
                     </div>
                 </div>

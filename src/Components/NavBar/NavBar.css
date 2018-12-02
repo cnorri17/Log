@@ -1,9 +1,10 @@
 Button {
-    font-family: 'Cabin Sketch', cursive;
+    font-family: 'Arimo', sans-serif;
+    border-radius: 10px !important;
 }
 
 #info {
-    font-family: 'Cabin Sketch', cursive;
+    font-family: 'Arimo', sans-serif;
     border-radius: 25%;
 }
 

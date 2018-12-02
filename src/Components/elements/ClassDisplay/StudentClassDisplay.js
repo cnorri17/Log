@@ -120,13 +120,13 @@ class StudentClassDisplay extends Component {
         if (currentUser) {
             if(this.state.inputCode !== this.state.attendanceCode)
             {
-                alert("That is not the correct daily code.");
+                alert("Incorrect Daily Code!!!!");
             } else{
                 this.updateClassAttendance(currentUser.uid, this.props.classID)
                 setTimeout(() => {
                     this.updateStudentAttendance(currentUser.uid, this.props.classID);
                     this.setState({logging: false})
-                    alert('Your attendance was taken!')
+                    alert('Your Attendance Has Been Successfully Logged!')
                 }, 1000);
             }
         }
@@ -141,16 +141,18 @@ class StudentClassDisplay extends Component {
             <div className="classContainer">
                 <div className="row-1">
                     <div className='col-4'>
-                        <h1 className='classH1'>ClassName: {this.props.name}</h1>
-                        <h2 className='classH2'>Section: {this.props.section}</h2>
-                        <h2 className='classH2'>ClassID: {this.props.classID}</h2>
+                        <h3 className='classH1'>ClassName: {this.props.name}</h3>
+                        <h4 className='classH2'>Section: {this.props.section}</h4>
+                        <h4 className='classH2'>ClassID: {this.props.classID}</h4>
                     </div>
                     <div className='col-5'>
-                        <h2 className='classH2'>Attendance Rate: {this.state.attendanceRate}</h2>
+                        <h3 className='classH2'>Attendance Rate: {this.state.attendanceRate}</h3>
                     </div>
                     <div className='col-5'>
                         <button className='logBtn'disabled={!this.state.logging} onClick={this.logAttendance}>Log</button>
+                        <label for="code">Logging Code:</label>
                         <input 
+                            id="code"
                             name="inputCode" 
                             type='text'
                             value={this.state.inputCode}

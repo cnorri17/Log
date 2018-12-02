@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Input, Button, Card, CardBody} from 'mdbreact';
 import '../CardLogin/CardLogin.css'
+import './signUp.css';
 import {firebase} from '../../fbConfig.js'
 
 class SignUp extends Component {
@@ -42,7 +43,7 @@ class SignUp extends Component {
                     })
                     .then(result => {
                         console.log(result);
-                        alert("You created an account!");
+                        alert("You Have Created An Account!");
                     })
                     .catch(error => {
                         console.log(error);
@@ -52,9 +53,9 @@ class SignUp extends Component {
                 var errorCode=error.code;
                 var errorMessage= error.message;
                 if (errorCode === 'auth/weak-password'){
-                    alert('The password is too weak.');
+                    alert('ERROR!: Weak Password');
                 } else {
-                    alert('ErrorCode: ' + errorCode + '\nErrorMessage: ' + errorMessage);
+                    alert('ERROR!: ' + errorCode + '\nErrorMessage: ' + errorMessage);
                 }
                 console.log(error);
             });
@@ -73,7 +74,7 @@ class SignUp extends Component {
 
                                 <Input 
                                     name="email" 
-                                    label="Email" 
+                                    label="Email Address" 
                                     group type="email" 
                                     icon="envelope-o" 
                                     validate error="wrong" 
@@ -109,14 +110,14 @@ class SignUp extends Component {
                                     />
                                 </div>
                                 <div>
-                                    <input name="selection" type="radio" value="teacher" onClick={this.handleRadio} paddingRight="1px"/>
+                                    <input name="selection" type="radio" value="teacher" onClick={this.handleRadio}/>
                                     <h5>Teacher</h5>
-                                    <input name="selection" type="radio" value="student" onClick={this.handleRadio} paddingLeft="1px"/>
+                                    <input name="selection" type="radio" value="student" onClick={this.handleRadio} />
                                     <h5>Student</h5>
                                 </div>
                             </div>
                             <div className="text-center py-4 mt-3">
-                                <Button color="black" type="submit">SIGN UP</Button>
+                                <Button color="grey" type="submit">SIGN UP</Button>
                                 {/* <Button color="black" onClick={this.handleButton}>Show Account Type</Button> */}
                             </div>
                         </form>

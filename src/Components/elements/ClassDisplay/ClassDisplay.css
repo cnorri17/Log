@@ -1,28 +1,57 @@
 .classContainer{
-    min-width: 75%;
+    width:100%;
     max-width: 100%;
-    min-height: 18rem;
-    border-style: solid;
-    border-color: black;
-    border-width: 10px;
+    min-height: 15rem;
+    border-radius:10px;
+    background-color: grey;
+    margin: 5px;
+    padding: 10px;
+    
 }
 
 .row-1:before,
 .row-1:after {
+    border-radius: 10px;
     clear:both;
     min-height: 10rem;
+    padding: 5px;
+    margin: 5px;
 }
 
 .col-4{
-    min-width: 60%;
-    max-width: 60%;
-    background-color: orange;
+    padding: 5px;
+    margin: 5px;
+    border-radius: 10px;
+    width:40%;
+    background-color: #FBC02D;
 }
 .col-5{
-    min-width: 20%;
-    max-width: 20%;
-    background-color: yellowgreen;
+    padding: 5px;
+    margin:5px;
+    border-radius: 10px;
+    padding: 5px;
+    width: 25%;
+    background-color: #FBC02D;
 }
-.logBtn{
-    
+Button{
+    display: block;
+    padding: 5px;
+    border: 3px solid grey;
+    margin: 5px;
+    border-radius: 10px;
+    color:white;
+    background-color: grey;
+}
+input{
+    display:inline;
+    border-radius: 5px;
+    margin: 5px;
+    padding: 5px;
+    width: 80px;
+}
+label{
+    display:inline;
+    font-size: 18px;
+    margin: 5px;
+    padding: 5px;
 }

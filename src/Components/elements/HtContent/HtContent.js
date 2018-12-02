@@ -14,7 +14,7 @@ class HtContent extends Component {
     render() {
         return (
             <div className = 'divStuff'>
-                <h1>User: {this.props.firstName} {this.props.lastName}</h1>
+                <h4>User: {this.props.firstName.charAt(0).toUpperCase()+ this.props.firstName.slice(1)} {this.props.lastName.charAt(0).toUpperCase() + this.props.lastName.slice(1)}</h4>
                 {this.props.children.map( (doc,key) => {
                     return (
                         <TeacherClassDisplay

@@ -1,8 +1,8 @@
 .attendance {
     width: 100px;
     height: 100px;
-    font-size: 1.1em;
-    color: black;
+    font-size: 1.6em !important;
+    color: grey;
     padding: 10px;
     border-style: solid;
     border-width: 1px;
@@ -10,7 +10,9 @@
     border-color: grey;
 }
 
-.attendance h2 {
+.attendance h4 {
     padding: 20px;
     padding-left: 10px;
+    font-size: 18px !important;
+
 }

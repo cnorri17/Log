@@ -57,7 +57,7 @@ class Modal extends Component{
     }
     batch.commit()
     .then(() => {
-      alert('Classes created!')
+      alert('Class(s) Successfully Created!')
     })
     .catch(error => {
       console.log('batch error: ' + error);
@@ -113,9 +113,9 @@ class Modal extends Component{
               console.log("Error in handleStudentSubmit - creating the student subcollection for class: \n" + error)
             });
             // }
-          alert("Added class!");
+          alert("Successfully Joined Class!");
         } else {
-          alert("This class does not exist");
+          alert("This Class Does Not Exist!");
         }
       })
       .catch(error => {
@@ -127,19 +127,19 @@ class Modal extends Component{
     return(
       <form onSubmit={this.handleTeacherSubmit}>
           <p className="h4 yellow darken-2 white-text text-center py-4" style={{paddingRight:'0%'}}>LOG IN</p>
-          <div className="grey-text">
+          <div className="black-text">
               <Input
                   name='className' 
-                  label="Class Name" 
+                  label="Enter Class Name" 
                   className="black-text"
                   type="text"
                   value={this.state.className}
                   onChange={this.handleChange}
               />
-              <h3>Number of Sections</h3>
+              <h6 className="black-text2">Number of Sections</h6>
               <input
                 name='quantity'
-                className="mb-2 black-text"
+                className="black-text2"
                 label="Number of Sections"
                 type="number"
                 min={1}
@@ -149,7 +149,7 @@ class Modal extends Component{
               />
           </div>
           <div className="text-center py-4 mt-3">
-              <Button color="black" type="submit">Create Class</Button>
+              <Button color="grey" type="submit">Create Class</Button>
           </div>
       </form>
     )
@@ -159,10 +159,10 @@ class Modal extends Component{
     return(
       <form onSubmit={this.handleStudentSubmit}>
           <p className="h4 yellow darken-2 white-text text-center py-4" style={{paddingRight:'0%'}}>Input Class Code</p>
-          <div className="grey-text">
+          <div className="black-text">
               <Input
                   name='classCode' 
-                  label="class code"
+                  label="Class Code:"
                   type="text"
                   className="black-text"
                   validate error="wrong" 
@@ -172,7 +172,7 @@ class Modal extends Component{
               />
           </div>
           <div className="text-center py-4 mt-3">
-              <Button color="black" type="submit">Add Class</Button>
+              <Button color="grey" type="submit">Add Class</Button>
           </div>
       </form>
     )
