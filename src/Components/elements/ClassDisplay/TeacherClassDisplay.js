@@ -88,7 +88,7 @@ class TeacherClassDisplay extends Component {
                             this.setState({ attendanceCounter: this.state.attendanceCounter + doc.data().totalAttendance})
                         })
                         console.log("attendanceCounter scanned from every student: " + this.state.attendanceCounter)
-                        avgAttendance = ((this.state.attendanceCounter/numOfStudents)/totalDays) * 100;
+                        avgAttendance = (this.state.attendanceCounter)/numOfStudents;
                         console.log("avgAttendance calculated after scanning students: " + avgAttendance)
                     })
                 
