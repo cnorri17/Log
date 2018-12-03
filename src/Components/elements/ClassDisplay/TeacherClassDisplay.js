@@ -186,20 +186,27 @@ class TeacherClassDisplay extends Component {
                         <p>{this.state.attendanceCode}</p>
                     </div>
                 </div>
-                <div className={this.state.showStudentList ? 'sList display-block' : 'sList display-none'}>
-                    {this.state.studentList.map( (element, key) => {
-                        return(
-                            <div key={key}>
-                                <h2>{element.studentName} : {element.attendanceRate}</h2>
-                            </div>
-                        )
-                    })}
-                    <button 
-                    className={this.state.showStudentList ? 'closeBtn display-block': 'closeBtn display-none'}
-                    onClick={this.handleStudentList}>
-                        Close
-                    </button>
+                <div className="row-1">
+                    <div className='col-6'>
                     
+                        <div className={this.state.showStudentList ? 'sList display-block' : 'sList display-none'}>
+                            <h2>Student List</h2>
+                            {this.state.studentList.map( (element, key) => {
+                                return(
+                                    <div className="studentList" key={key}>
+                                        <p>{element.studentName} : {element.attendanceRate}</p>
+                                    </div>
+                                )
+                            })}
+
+                            <button 
+                            className={this.state.showStudentList ? 'closeBtn display-block': 'closeBtn display-none'}
+                            onClick={this.handleStudentList}>
+                                Close
+                            </button>
+                            
+                        </div>
+                    </div>
                 </div>
             </div>
         )

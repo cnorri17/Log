@@ -23,17 +23,46 @@
     margin: 5px;
     border-radius: 10px;
     width:40%;
+    /* max-height: 230px; */
     background-color: #FBC02D;
 }
 .col-5{
-    padding: 5px;
+    padding: 5x;
     margin:5px;
     border-radius: 10px;
-    padding: 5px;
     width: 25%;
+    /* max-height: 230px; */
     background-color: #FBC02D;
 }
+
+.col-6{
+    padding: 5x;
+    margin:5px;
+    border-radius: 10px;
+    width: 110%;
+    /* max-height: 230px; */
+    background-color: #FBC02D;
+}
+
+.classH2 {
+    padding: 5px;
+    margin: 5px;
+    border-radius: 10px;
+    width:50%;
+    background-color: #FBC02D;
+}
+
+.studentList {
+    background-color: #FBC02D;
+    
+}
+
+.sList {
+    padding: 20px;
+}
+
 Button{
+    
     display: block;
     padding: 5px;
     border: 3px solid grey;
@@ -62,3 +91,4 @@ label{
 .display-block{
     display: block;
 }
+
