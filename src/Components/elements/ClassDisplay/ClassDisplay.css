@@ -55,3 +55,10 @@ label{
     margin: 5px;
     padding: 5px;
 }
+
+.display-none{
+    display: none;
+}
+.display-block{
+    display: block;
+}

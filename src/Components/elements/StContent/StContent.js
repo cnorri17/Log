@@ -14,24 +14,6 @@ class StContent extends Component {
         // this.logListener("GNEKJsSzmvZDt3sxwC8u");
     }
 
-    // logListener = (classID) => {
-    //     console.log("ClassID: " + classID)
-    //     const currentUser = firebase.auth().currentUser;
-        
-    //     if (currentUser){
-    //         const classRef = firebase.firestore().collection("Classes").doc(classID);
-    //         var logValue = false;
-    //         classRef.onSnapshot(doc => {
-    //             const data = doc.data();
-    //             logValue = data.logging;
-
-    //         })
-    //         console.log("outside listen new log" + logValue);
-    //         this.setState({logging: logValue})
-    //         return logValue;
-    //     }
-    // }
-
     render() {
         return (
             <div>

@@ -27,7 +27,6 @@ class HtContent extends Component {
                     )
                 })}
             </div>
-
         )
     }
 }

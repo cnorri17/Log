@@ -11,11 +11,15 @@ class TeacherClassDisplay extends Component {
             attendanceCode: '',
             attendanceCounter: 0,
             attendanceRate: 0,
+            studentList: [],
+            showStudentList: false,
         }
         this.takeAttendance = this.takeAttendance.bind(this);
         this.logListener = this.logListener.bind(this);
         this.generateCode = this.generateCode.bind(this);
         this.calculateAttendance = this.calculateAttendance.bind(this);
+        this.fetchStudents = this.fetchStudents.bind(this);
+        this.handleStudentList = this.handleStudentList.bind(this);
     }
 
     componentDidMount() {
@@ -136,26 +140,66 @@ class TeacherClassDisplay extends Component {
         }
     }
 
+    fetchStudents() {
+        const currentUser = firebase.auth().currentUser;
+        const classRef = firebase.firestore().collection('Classes').doc(this.props.classID);
+        if(currentUser) {
+            classRef.collection('Students').get()
+                .then(students => {
+                    var items = [];
+                    students.forEach(doc => {
+                        const data = doc.data();
+                        let newName = data.firstName + data.lastName;
+                        items.push({
+                            studentName: newName,
+                            attendanceRate: data.attendanceRate,
+                        })
+                    })
+                    this.setState({ studentList: items })
+                })
+            this.timeout = setTimeout(() => {
+                this.setState({showStudentList: true})
+            }, 1000);
+        }
+    }
+    handleStudentList(event) {
+        this.setState({ showStudentList: false })
+    }
+
     render() {
         return(
             <div className="classContainer">
                 <div className="row-1">
                     <div className='col-4'>
-                        <h3 className='classH1'>ClassName: {this.props.name}</h3>
+                        <h3 className='classH1'>{this.props.name}</h3>
                         <h4 className='classH2'>Section: {this.props.section}</h4>
                         <h4 className='classH2'>ClassID: {this.props.classID}</h4>
+                        <button className='showBtn' onClick={this.fetchStudents}>Show Students</button>
                     </div>
                     <div className='col-5'>
                         <h3 className='classH2'>Attendance Rate: {this.state.attendanceRate} %</h3>
                     </div>
-                    
                     <div className='col-5'>
-                        
                         <button onClick={this.takeAttendance}>{this.state.logging ? "Stop Logging" : "Log"}</button>
                         {/* {this.state.logging ? <p>{this.state.attendanceCode}</p> : null} */}
                         <label for="button">Logging Code:</label>
                         <p>{this.state.attendanceCode}</p>
                     </div>
+                </div>
+                <div className={this.state.showStudentList ? 'sList display-block' : 'sList display-none'}>
+                    {this.state.studentList.map( (element, key) => {
+                        return(
+                            <div key={key}>
+                                <h2>{element.studentName} : {element.attendanceRate}</h2>
+                            </div>
+                        )
+                    })}
+                    <button 
+                    className={this.state.showStudentList ? 'closeBtn display-block': 'closeBtn display-none'}
+                    onClick={this.handleStudentList}>
+                        Close
+                    </button>
+                    
                 </div>
             </div>
         )
