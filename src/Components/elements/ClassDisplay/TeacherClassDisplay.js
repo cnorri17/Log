@@ -85,7 +85,7 @@ class TeacherClassDisplay extends Component {
                         console.log('The reference is working');
                         student.forEach(doc => {
                             console.log("doc.data().totalAttendance: " + doc.data().totalAttendance)
-                            this.setState({ attendanceCounter: this.state.attendanceCounter + doc.data().totalAttendance})
+                            this.setState({ attendanceCounter: this.state.attendanceCounter + doc.data().attendanceRate})
                         })
                         console.log("attendanceCounter scanned from every student: " + this.state.attendanceCounter)
                         avgAttendance = (this.state.attendanceCounter)/numOfStudents;
